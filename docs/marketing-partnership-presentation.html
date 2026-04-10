@@ -4,460 +4,202 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VisionNetworking — Marketing Partnership Proposal</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-  :root {
-    --bg: #09101f;
-    --bg-card: rgba(255,255,255,0.04);
-    --bg-card-hover: rgba(255,255,255,0.07);
-    --border: rgba(255,255,255,0.06);
-    --border-accent: rgba(56,189,248,0.2);
-    --accent: #38bdf8;
-    --accent2: #818cf8;
-    --accent3: #34d399;
-    --white: #f1f5f9;
-    --gray: #94a3b8;
-    --gray-dim: #475569;
-    --text: #cbd5e1;
+  :root{
+    --navy:#0F172A;
+    --blue:#1D4ED8;
+    --blue-light:#DBEAFE;
+    --white:#FFFFFF;
+    --bg:#FAFBFC;
+    --text:#1E293B;
+    --text-sec:#64748B;
+    --text-dim:#94A3B8;
+    --border:#E2E8F0;
+    --border-light:#F1F5F9;
+    --green:#059669;
+    --red:#DC2626;
   }
 
-  html, body {
-    height: 100%;
-    overflow: hidden;
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--white);
-    -webkit-font-smoothing: antialiased;
+  html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;background:var(--white);color:var(--text);-webkit-font-smoothing:antialiased}
+
+  .deck{position:relative;width:100vw;height:100vh}
+
+  .slide{
+    position:absolute;inset:0;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:56px 88px;
+    opacity:0;visibility:hidden;
+    transition:opacity 0.5s ease,visibility 0s 0.5s;
+    overflow-y:auto;
+    background:var(--white);
   }
+  .slide.active{opacity:1;visibility:visible;transition:opacity 0.5s ease,visibility 0s}
+  .slide.active .fi{animation:fi .6s ease forwards}
+  .slide.active .fi:nth-child(2){animation-delay:.08s}
+  .slide.active .fi:nth-child(3){animation-delay:.14s}
+  .slide.active .fi:nth-child(4){animation-delay:.20s}
+  .slide.active .fi:nth-child(5){animation-delay:.26s}
+  .slide.active .fi:nth-child(6){animation-delay:.32s}
+  .slide.active .fi:nth-child(7){animation-delay:.38s}
+  @keyframes fi{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+  .fi{opacity:0}
 
-  .deck { position: relative; width: 100vw; height: 100vh; }
+  /* Dark slides */
+  .slide.dark{background:var(--navy);color:var(--white)}
+  .slide.dark p,.slide.dark li{color:#CBD5E1}
+  .slide.dark .tag{color:var(--white);opacity:0.4}
+  .slide.dark .border-b{border-color:rgba(255,255,255,0.08)}
 
-  .slide {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 64px 80px;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), visibility 0s 0.6s;
-    overflow-y: auto;
-  }
-  .slide.active {
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), visibility 0s 0s;
-  }
-  .slide.active .fade-in { animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) forwards; }
-  .slide.active .fade-in:nth-child(1) { animation-delay: 0.05s; }
-  .slide.active .fade-in:nth-child(2) { animation-delay: 0.12s; }
-  .slide.active .fade-in:nth-child(3) { animation-delay: 0.19s; }
-  .slide.active .fade-in:nth-child(4) { animation-delay: 0.26s; }
-  .slide.active .fade-in:nth-child(5) { animation-delay: 0.33s; }
-  .slide.active .fade-in:nth-child(6) { animation-delay: 0.40s; }
-  .slide.active .fade-in:nth-child(7) { animation-delay: 0.47s; }
-  .slide.active .fade-in:nth-child(8) { animation-delay: 0.54s; }
+  h1{font-family:'Poppins',sans-serif;font-size:2.8rem;font-weight:700;line-height:1.12;letter-spacing:-0.02em;color:var(--navy)}
+  h2{font-family:'Poppins',sans-serif;font-size:2rem;font-weight:600;line-height:1.2;letter-spacing:-0.01em;color:var(--navy);margin-bottom:6px}
+  h3{font-family:'Poppins',sans-serif;font-size:1rem;font-weight:600;color:var(--navy);margin-bottom:4px}
+  p,li{font-size:0.92rem;line-height:1.7;color:var(--text-sec)}
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  .slide.dark h1,.slide.dark h2,.slide.dark h3{color:var(--white)}
 
-  .fade-in { opacity: 0; }
+  .tag{font-size:0.62rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px;display:block}
+  .sub{font-size:1.05rem;color:var(--text-sec);max-width:520px;margin-top:6px}
 
-  /* Typography */
-  h1 { font-family: 'Poppins', sans-serif; font-size: 3.2rem; font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; }
-  h2 { font-family: 'Poppins', sans-serif; font-size: 2.4rem; font-weight: 600; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 8px; }
-  h3 { font-family: 'Poppins', sans-serif; font-size: 1.15rem; font-weight: 600; color: var(--white); margin-bottom: 6px; }
-  p, li { font-size: 0.95rem; line-height: 1.7; color: var(--text); }
+  ul{list-style:none;padding:0}
+  ul li{padding-left:18px;position:relative;margin-bottom:8px;font-size:0.88rem}
+  ul li::before{content:'';position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--blue)}
+  .slide.dark ul li::before{background:rgba(255,255,255,0.3)}
 
-  .gradient-text {
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+  .accent{color:var(--blue);font-weight:600}
 
-  .tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 16px;
-  }
-  .tag::before {
-    content: '';
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--accent);
-    opacity: 0.5;
-  }
+  /* Layouts */
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px}
+  .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:24px}
+  .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px}
 
-  .sub { font-size: 1.1rem; color: var(--gray); line-height: 1.6; max-width: 560px; margin-top: 8px; }
+  /* Card */
+  .card{border:1px solid var(--border);border-radius:10px;padding:24px;background:var(--white)}
+  .slide.dark .card{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08)}
 
-  ul { list-style: none; padding: 0; }
-  ul li { padding-left: 20px; position: relative; margin-bottom: 10px; font-size: 0.9rem; }
-  ul li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 9px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    opacity: 0.6;
-  }
+  /* Stat */
+  .stat{text-align:center;padding:24px 16px}
+  .stat .n{font-family:'Poppins',sans-serif;font-size:2.4rem;font-weight:700;color:var(--navy);line-height:1}
+  .stat .l{font-size:0.68rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em;margin-top:6px;font-weight:500}
+  .slide.dark .stat .n{color:var(--white)}
 
-  /* Grid layouts */
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 24px; }
-  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 24px; }
-  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 24px; }
-
-  /* Cards */
-  .card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 28px;
-    transition: background 0.3s, border-color 0.3s;
-  }
-
-  /* Stat block */
-  .stat {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 28px;
-    text-align: center;
-  }
-  .stat .num {
-    font-family: 'Poppins', sans-serif;
-    font-size: 2.8rem;
-    font-weight: 700;
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-  .stat .lbl {
-    font-size: 0.75rem;
-    color: var(--gray-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 500;
-  }
-
-  /* Glow accent */
-  .glow-accent { color: var(--accent); }
-  .glow-purple { color: var(--accent2); }
-  .glow-green { color: var(--accent3); }
-
-  /* Icon circle */
-  .icon-circle {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-bottom: 12px;
-  }
-  .icon-circle.blue { background: rgba(56,189,248,0.1); }
-  .icon-circle.purple { background: rgba(129,140,248,0.1); }
-  .icon-circle.green { background: rgba(52,211,153,0.1); }
-  .icon-circle.orange { background: rgba(251,146,60,0.1); }
-
-  .icon-circle svg { width: 20px; height: 20px; }
+  /* Stat with border */
+  .stat-bordered{border:1px solid var(--border);border-radius:10px}
 
   /* Flow */
-  .flow { display: flex; align-items: stretch; gap: 0; margin-top: 32px; }
-  .flow-step {
-    flex: 1;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 24px 20px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-  }
-  .flow-step .step-n {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: 0.85rem;
-    color: var(--bg);
-  }
-  .flow-step h3 { font-size: 0.95rem; margin: 0; }
-  .flow-step p { font-size: 0.78rem; color: var(--gray); }
-  .flow-arrow { display: flex; align-items: center; color: var(--gray-dim); padding: 0 6px; font-size: 1.2rem; }
+  .flow{display:flex;align-items:stretch;gap:0;margin-top:28px}
+  .flow-s{flex:1;border:1px solid var(--border);border-radius:10px;padding:20px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--white)}
+  .flow-s .sn{width:32px;height:32px;border-radius:50%;background:var(--navy);color:var(--white);display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-weight:700;font-size:0.8rem}
+  .flow-s h3{font-size:0.88rem;margin:0}
+  .flow-s p{font-size:0.75rem;color:var(--text-dim)}
+  .flow-a{display:flex;align-items:center;color:var(--border);padding:0 4px;font-size:1rem}
 
   /* Table */
-  .tbl { width: 100%; border-collapse: collapse; margin-top: 20px; }
-  .tbl th {
-    text-align: left;
-    padding: 10px 14px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--gray-dim);
-    border-bottom: 1px solid var(--border);
-  }
-  .tbl td {
-    padding: 12px 14px;
-    font-size: 0.88rem;
-    border-bottom: 1px solid var(--border);
-    color: var(--text);
-  }
-  .tbl td:first-child { color: var(--white); font-weight: 500; }
-  .tbl tr:last-child td { border-bottom: none; }
+  .tbl{width:100%;border-collapse:collapse;margin-top:20px}
+  .tbl th{text-align:left;padding:10px 12px;font-size:0.65rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-dim);border-bottom:2px solid var(--navy)}
+  .tbl td{padding:10px 12px;font-size:0.85rem;border-bottom:1px solid var(--border);color:var(--text-sec)}
+  .tbl td:first-child{color:var(--text);font-weight:500}
+  .tbl tr:last-child td{border-bottom:none}
+  .slide.dark .tbl th{color:rgba(255,255,255,0.4);border-color:rgba(255,255,255,0.15)}
+  .slide.dark .tbl td{border-color:rgba(255,255,255,0.06);color:#CBD5E1}
+  .slide.dark .tbl td:first-child{color:var(--white)}
 
-  /* Timeline */
-  .phases { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 28px; }
-  .phase {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 24px;
-    position: relative;
-    overflow: hidden;
-  }
-  .phase::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-  }
-  .phase:nth-child(1)::before { background: var(--accent); }
-  .phase:nth-child(2)::before { background: var(--accent2); }
-  .phase:nth-child(3)::before { background: var(--accent3); }
-  .phase .plbl { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 4px; }
-  .phase:nth-child(1) .plbl { color: var(--accent); }
-  .phase:nth-child(2) .plbl { color: var(--accent2); }
-  .phase:nth-child(3) .plbl { color: var(--accent3); }
-  .phase h3 { font-size: 1.1rem; }
-  .phase .pdate { font-size: 0.8rem; color: var(--gray-dim); margin-bottom: 12px; }
-  .phase ul li { font-size: 0.82rem; margin-bottom: 6px; }
+  /* Phases */
+  .phases{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:24px}
+  .ph{border:1px solid var(--border);border-radius:10px;padding:22px;border-top:3px solid var(--navy)}
+  .ph:nth-child(2){border-top-color:var(--blue)}
+  .ph:nth-child(3){border-top-color:var(--green)}
+  .ph .plbl{font-size:0.6rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:2px}
+  .ph .pdate{font-size:0.78rem;color:var(--text-dim);margin-bottom:10px}
+  .ph ul li{font-size:0.8rem;margin-bottom:5px}
 
   /* KPI */
-  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 24px; }
-  .kpi {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-    border-left: 3px solid var(--accent);
-  }
-  .kpi:nth-child(2n) { border-left-color: var(--accent2); }
-  .kpi:nth-child(3n) { border-left-color: var(--accent3); }
-  .kpi .kn { font-size: 0.85rem; font-weight: 600; color: var(--white); margin-bottom: 4px; }
-  .kpi .kt { font-size: 0.75rem; color: var(--gray); }
+  .kpi-g{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
+  .kpi{border:1px solid var(--border);border-radius:8px;padding:16px;border-left:3px solid var(--navy)}
+  .kpi:nth-child(2n){border-left-color:var(--blue)}
+  .kpi .kn{font-size:0.82rem;font-weight:600;color:var(--text);margin-bottom:2px}
+  .kpi .kt{font-size:0.72rem;color:var(--text-dim)}
 
   /* Reasons */
-  .reasons { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; }
-  .reason {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 22px;
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
-  }
-  .reason-n {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: 0.8rem;
-    color: var(--bg);
-    flex-shrink: 0;
-  }
-  .reason h4 { font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 600; margin-bottom: 3px; }
-  .reason p { font-size: 0.8rem; color: var(--gray); margin: 0; }
+  .reasons{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+  .rsn{border:1px solid var(--border);border-radius:10px;padding:18px;display:flex;gap:12px;align-items:flex-start}
+  .rsn-n{width:28px;height:28px;border-radius:6px;background:var(--navy);color:var(--white);display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-weight:700;font-size:0.72rem;flex-shrink:0}
+  .rsn h4{font-family:'Poppins',sans-serif;font-size:0.88rem;font-weight:600;margin-bottom:2px}
+  .rsn p{font-size:0.78rem;color:var(--text-sec);margin:0}
 
-  /* Steps list */
-  .steps { margin-top: 28px; }
-  .step-row {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    padding: 20px 0;
-    border-bottom: 1px solid var(--border);
-  }
-  .step-row:last-child { border-bottom: none; }
-  .step-row .sn {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    color: var(--bg);
-    flex-shrink: 0;
-  }
-  .step-row strong { color: var(--white); font-size: 1rem; display: block; margin-bottom: 2px; }
-  .step-row span { color: var(--gray); font-size: 0.85rem; }
+  /* Steps */
+  .steps{margin-top:24px}
+  .srow{display:flex;gap:18px;align-items:center;padding:18px 0;border-bottom:1px solid var(--border)}
+  .srow:last-child{border-bottom:none}
+  .srow .sn{width:36px;height:36px;border-radius:8px;background:var(--navy);color:var(--white);display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-weight:700;font-size:0.85rem;flex-shrink:0}
+  .srow strong{color:var(--text);font-size:0.95rem;display:block;margin-bottom:1px}
+  .srow span{color:var(--text-sec);font-size:0.82rem}
 
   /* Highlight */
-  .highlight {
-    background: linear-gradient(135deg, rgba(56,189,248,0.08), rgba(129,140,248,0.08));
-    border: 1px solid rgba(56,189,248,0.15);
-    border-radius: 14px;
-    padding: 20px 28px;
-    margin-top: 24px;
-  }
-  .highlight p { color: var(--white); font-weight: 500; font-size: 0.95rem; }
+  .hl{background:var(--border-light);border:1px solid var(--border);border-radius:10px;padding:18px 24px;margin-top:20px}
+  .hl p{color:var(--text);font-weight:500;font-size:0.9rem}
+  .slide.dark .hl{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08)}
+  .slide.dark .hl p{color:#E2E8F0}
 
-  /* Gap visual */
-  .gap-row { display: flex; align-items: center; justify-content: center; gap: 32px; margin: 40px 0; }
-  .gap-box {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 32px 40px;
-    text-align: center;
-    min-width: 200px;
-  }
-  .gap-box.active { border-color: var(--accent); }
-  .gap-bridge {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-  }
-  .gap-bridge .line { width: 80px; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 1px; }
-  .gap-bridge .blbl { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+  /* Gap */
+  .gap-row{display:flex;align-items:center;justify-content:center;gap:28px;margin:36px 0}
+  .gap-b{border:1px solid var(--border);border-radius:10px;padding:28px 36px;text-align:center;min-width:190px}
+  .gap-b.hi{border-color:var(--blue);background:var(--blue-light)}
+  .gap-m{display:flex;flex-direction:column;align-items:center;gap:4px}
+  .gap-m .ln{width:64px;height:2px;background:var(--navy)}
+  .gap-m .lb{font-size:0.6rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-dim)}
 
   /* Channels */
-  .ch-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 20px; }
-  .ch {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-  }
-  .ch .cn { font-weight: 600; color: var(--white); margin-bottom: 2px; font-size: 0.95rem; }
-  .ch .cs { font-size: 0.78rem; color: var(--accent); font-weight: 500; margin-bottom: 6px; }
-  .ch .cd { font-size: 0.78rem; color: var(--gray); }
+  .ch-g{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:18px}
+  .ch{border:1px solid var(--border);border-radius:8px;padding:16px}
+  .ch .cn{font-weight:600;color:var(--text);font-size:0.9rem;margin-bottom:1px}
+  .ch .cs{font-size:0.75rem;color:var(--blue);font-weight:500;margin-bottom:4px}
+  .ch .cd{font-size:0.75rem;color:var(--text-dim)}
 
-  /* Title slide */
-  .title-center {
-    text-align: center;
-    align-items: center;
-  }
-  .logo { display: inline-flex; align-items: center; gap: 14px; margin-bottom: 40px; }
-  .logo-box {
-    width: 56px;
-    height: 56px;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: var(--bg);
-    box-shadow: 0 8px 32px rgba(56,189,248,0.2);
-  }
-  .logo-name { font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700; letter-spacing: -0.01em; }
-  .title-center h1 { font-size: 3.5rem; margin-bottom: 12px; }
-  .title-sub { font-size: 1.15rem; color: var(--gray); font-weight: 400; }
-  .title-line { width: 48px; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 2px; margin: 20px auto; }
-  .title-date { font-size: 0.85rem; color: var(--gray-dim); }
+  /* Title */
+  .tc{text-align:center;align-items:center}
+  .logo{display:inline-flex;align-items:center;gap:12px;margin-bottom:36px}
+  .logo-b{width:48px;height:48px;background:var(--navy);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:800;color:var(--white)}
+  .slide.dark .logo-b{background:var(--white);color:var(--navy)}
+  .logo-t{font-family:'Poppins',sans-serif;font-size:1.4rem;font-weight:700;color:var(--navy)}
+  .slide.dark .logo-t{color:var(--white)}
+  .tc h1{font-size:3rem;margin-bottom:8px}
+  .tc .tsub{font-size:1.1rem;color:var(--text-sec);font-weight:400}
+  .divider{width:40px;height:2px;background:var(--navy);margin:16px auto}
+  .slide.dark .divider{background:rgba(255,255,255,0.2)}
+  .tdate{font-size:0.82rem;color:var(--text-dim)}
 
-  /* Contact slide */
-  .contact-row { display: flex; justify-content: center; gap: 56px; margin-top: 36px; flex-wrap: wrap; }
-  .contact-item { text-align: center; }
-  .contact-item .cl { font-size: 0.65rem; color: var(--gray-dim); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 4px; font-weight: 600; }
-  .contact-item .cv { font-size: 1rem; color: var(--white); font-weight: 500; }
+  /* Contact */
+  .c-row{display:flex;justify-content:center;gap:48px;margin-top:32px;flex-wrap:wrap}
+  .c-item{text-align:center}
+  .c-item .cl{font-size:0.6rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:3px;font-weight:600}
+  .c-item .cv{font-size:0.95rem;color:var(--text);font-weight:500}
+  .slide.dark .c-item .cv{color:var(--white)}
 
   /* Nav */
-  .nav {
-    position: fixed;
-    bottom: 24px;
-    right: 32px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    z-index: 100;
-  }
-  .nav .cnt { font-size: 0.75rem; color: var(--gray-dim); font-weight: 500; letter-spacing: 0.5px; }
-  .nav button {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    background: var(--bg-card);
-    color: var(--white);
-    font-size: 0.9rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
-    backdrop-filter: blur(8px);
-  }
-  .nav button:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
-  .nav button:disabled { opacity: 0.2; cursor: default; }
-  .nav button:disabled:hover { background: var(--bg-card); border-color: var(--border); color: var(--white); }
+  .nav{position:fixed;bottom:20px;right:28px;display:flex;align-items:center;gap:10px;z-index:100}
+  .nav .cnt{font-size:0.72rem;color:var(--text-dim);font-weight:500}
+  .nav button{width:34px;height:34px;border-radius:8px;border:1px solid var(--border);background:var(--white);color:var(--text);font-size:0.85rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+  .nav button:hover{background:var(--navy);border-color:var(--navy);color:var(--white)}
+  .nav button:disabled{opacity:0.2;cursor:default}
+  .nav button:disabled:hover{background:var(--white);border-color:var(--border);color:var(--text)}
 
-  /* Progress */
-  .prog {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    transition: width 0.5s cubic-bezier(0.16,1,0.3,1);
-    z-index: 100;
-  }
+  .prog{position:fixed;top:0;left:0;height:2px;background:var(--navy);transition:width .5s ease;z-index:100}
 
-  /* Responsive */
-  @media (max-width: 1024px) {
-    .slide { padding: 40px 40px; }
-    h1 { font-size: 2.2rem; }
-    h2 { font-size: 1.8rem; }
-    .grid-2, .grid-3, .grid-4, .phases, .reasons, .kpi-grid, .ch-grid { grid-template-columns: 1fr; }
-    .flow { flex-direction: column; }
-    .flow-arrow { transform: rotate(90deg); }
-    .gap-row { flex-direction: column; }
+  @media(max-width:1024px){
+    .slide{padding:36px 36px}
+    h1{font-size:2rem}h2{font-size:1.6rem}
+    .g2,.g3,.g4,.phases,.reasons,.kpi-g,.ch-g{grid-template-columns:1fr}
+    .flow{flex-direction:column}.flow-a{transform:rotate(90deg)}
+    .gap-row{flex-direction:column}
   }
-
-  /* Print */
-  @media print {
-    html, body { overflow: visible; height: auto; }
-    .slide { position: relative; opacity: 1!important; visibility: visible!important; page-break-after: always; min-height: 100vh; padding: 48px 64px; }
-    .fade-in { opacity: 1!important; transform: none!important; }
-    .nav, .prog { display: none; }
+  @media print{
+    html,body{overflow:visible;height:auto}
+    .slide{position:relative;opacity:1!important;visibility:visible!important;page-break-after:always;min-height:100vh;padding:40px 56px}
+    .fi{opacity:1!important;transform:none!important}
+    .nav,.prog{display:none}
   }
 </style>
 </head>
@@ -466,307 +208,257 @@
 <div class="deck" id="deck">
 
   <!-- 1. TITLE -->
-  <div class="slide title-center active" data-i="0">
-    <div class="logo fade-in">
-      <div class="logo-box">VN</div>
-      <div class="logo-name">VisionNetworking</div>
-    </div>
-    <h1 class="fade-in">Marketing Partnership<br><span class="gradient-text">Proposal</span></h1>
-    <div class="title-line fade-in"></div>
-    <p class="title-sub fade-in">Building Iraq's First AI-Powered Procurement Platform</p>
-    <p class="title-date fade-in">April 2026 &middot; Confidential</p>
+  <div class="slide dark tc active" data-i="0">
+    <div class="logo fi"><div class="logo-b">VN</div><div class="logo-t">VisionNetworking</div></div>
+    <h1 class="fi" style="color:white">Marketing Partnership<br>Proposal</h1>
+    <div class="divider fi"></div>
+    <p class="tsub fi" style="color:#94A3B8">Building Iraq's First AI-Powered Procurement Platform</p>
+    <p class="tdate fi" style="color:#64748B">April 2026 &middot; Confidential</p>
   </div>
 
   <!-- 2. THE PROBLEM -->
   <div class="slide" data-i="1">
-    <div class="tag fade-in">Who We Are</div>
-    <h2 class="fade-in">The Problem</h2>
-    <p class="sub fade-in">How procurement works in Iraq today:</p>
-    <div class="grid-2 fade-in">
-      <div class="card">
-        <ul>
-          <li>Everything is <strong style="color:var(--accent)">manual</strong> — phone calls, paper, spreadsheets</li>
-          <li>Contractors call <strong style="color:var(--accent)">20+ suppliers</strong> for one quote</li>
-          <li>Price comparison takes <strong style="color:var(--accent)">days</strong>, not minutes</li>
-          <li>No centralized supplier directory exists</li>
-        </ul>
-      </div>
-      <div class="card">
-        <ul>
-          <li>All negotiations happen on <strong style="color:var(--accent)">WhatsApp</strong> — no records</li>
-          <li>Zero price transparency across the market</li>
-          <li>Repeated trips to showrooms across the city</li>
-          <li>Massive time &amp; cost waste on every project</li>
-        </ul>
-      </div>
+    <div class="tag fi">Who We Are</div>
+    <h2 class="fi">The Problem</h2>
+    <p class="sub fi">How procurement works in Iraq today:</p>
+    <div class="g2 fi">
+      <div class="card"><ul><li>Everything is <span class="accent">manual</span> — calls, paper, spreadsheets</li><li>Contractors call <span class="accent">20+ suppliers</span> for one quote</li><li>Price comparison takes <span class="accent">days</span>, not minutes</li><li>No centralized supplier directory</li></ul></div>
+      <div class="card"><ul><li>Negotiations on <span class="accent">WhatsApp</span> — no records</li><li>Zero price transparency</li><li>Repeated trips to showrooms across the city</li><li>Massive time &amp; cost waste per project</li></ul></div>
     </div>
-    <div class="highlight fade-in">
-      <p>A single procurement cycle takes 5–10 days of back-and-forth. We reduce that to under 24 hours.</p>
-    </div>
+    <div class="hl fi"><p>A single procurement cycle takes 5–10 days. We reduce that to under 24 hours.</p></div>
   </div>
 
   <!-- 3. OUR SOLUTION -->
   <div class="slide" data-i="2">
-    <div class="tag fade-in">Who We Are</div>
-    <h2 class="fade-in">Our <span class="gradient-text">Solution</span></h2>
-    <p class="sub fade-in">Iraq's first AI-powered BOQ-to-Quotation platform</p>
-    <div class="grid-4 fade-in">
-      <div class="stat"><div class="num glow-accent">1</div><div class="lbl">Platform</div></div>
-      <div class="stat"><div class="num glow-accent">38</div><div class="lbl">Buildings</div></div>
-      <div class="stat"><div class="num glow-purple">100+</div><div class="lbl">Brands</div></div>
-      <div class="stat"><div class="num glow-green">&lt;24h</div><div class="lbl">Turnaround</div></div>
+    <div class="tag fi">Who We Are</div>
+    <h2 class="fi">Our Solution</h2>
+    <p class="sub fi">Iraq's first AI-powered BOQ-to-Quotation platform.</p>
+    <div class="g4 fi">
+      <div class="stat stat-bordered"><div class="n">1</div><div class="l">Platform</div></div>
+      <div class="stat stat-bordered"><div class="n">38</div><div class="l">Buildings</div></div>
+      <div class="stat stat-bordered"><div class="n">100+</div><div class="l">Brands</div></div>
+      <div class="stat stat-bordered"><div class="n">&lt;24h</div><div class="l">Turnaround</div></div>
     </div>
-    <div class="highlight fade-in">
-      <p>Submit a BOQ. Get a competitive, multi-brand quotation — automatically.</p>
-    </div>
+    <div class="hl fi"><p>Submit a BOQ. Get a competitive, multi-brand quotation — automatically.</p></div>
   </div>
 
   <!-- 4. HOW IT WORKS -->
   <div class="slide" data-i="3">
-    <div class="tag fade-in">Who We Are</div>
-    <h2 class="fade-in">How It Works</h2>
-    <div class="flow fade-in">
-      <div class="flow-step"><div class="step-n">1</div><h3>Submit BOQ</h3><p>Upload in any format</p></div>
-      <div class="flow-arrow">&rarr;</div>
-      <div class="flow-step"><div class="step-n">2</div><h3>AI Processing</h3><p>Parsing, matching, pricing</p></div>
-      <div class="flow-arrow">&rarr;</div>
-      <div class="flow-step"><div class="step-n">3</div><h3>Get Quotation</h3><p>Competitive multi-brand quotes</p></div>
-      <div class="flow-arrow">&rarr;</div>
-      <div class="flow-step"><div class="step-n">4</div><h3>Connect</h3><p>Direct supplier connection</p></div>
+    <div class="tag fi">Who We Are</div>
+    <h2 class="fi">How It Works</h2>
+    <div class="flow fi">
+      <div class="flow-s"><div class="sn">1</div><h3>Submit BOQ</h3><p>Any format accepted</p></div>
+      <div class="flow-a">&rarr;</div>
+      <div class="flow-s"><div class="sn">2</div><h3>AI Processing</h3><p>Parse, match, price</p></div>
+      <div class="flow-a">&rarr;</div>
+      <div class="flow-s"><div class="sn">3</div><h3>Quotation</h3><p>Competitive multi-brand</p></div>
+      <div class="flow-a">&rarr;</div>
+      <div class="flow-s"><div class="sn">4</div><h3>Connect</h3><p>Direct to supplier</p></div>
     </div>
-    <p class="fade-in" style="text-align:center;color:var(--gray-dim);font-size:0.85rem;margin-top:28px">Document upload to supplier connection — fully automated, AI-driven</p>
+    <p class="fi" style="text-align:center;color:var(--text-dim);font-size:0.82rem;margin-top:24px">Fully automated, AI-driven — from document upload to supplier connection.</p>
   </div>
 
   <!-- 5. OUR NETWORK -->
   <div class="slide" data-i="4">
-    <div class="tag fade-in">Who We Are</div>
-    <h2 class="fade-in">Our Network</h2>
-    <p class="sub fade-in">A curated, verified supplier ecosystem across Iraq</p>
-    <div class="grid-4 fade-in">
-      <div class="stat"><div class="num glow-accent">38</div><div class="lbl">Buildings</div></div>
-      <div class="stat"><div class="num glow-purple">100+</div><div class="lbl">Brands</div></div>
-      <div class="stat"><div class="num glow-green">18</div><div class="lbl">Governorates</div></div>
-      <div class="stat"><div class="num" style="color:#fb923c">12</div><div class="lbl">Industries</div></div>
+    <div class="tag fi">Who We Are</div>
+    <h2 class="fi">Our Network</h2>
+    <p class="sub fi">A curated, verified supplier ecosystem across all of Iraq.</p>
+    <div class="g4 fi">
+      <div class="stat stat-bordered"><div class="n">38</div><div class="l">Buildings</div></div>
+      <div class="stat stat-bordered"><div class="n">100+</div><div class="l">Brands</div></div>
+      <div class="stat stat-bordered"><div class="n">18</div><div class="l">Governorates</div></div>
+      <div class="stat stat-bordered"><div class="n">12</div><div class="l">Industries</div></div>
     </div>
-    <div class="highlight fade-in">
-      <p>Every supplier is physically verified. Every product is cataloged with real pricing data.</p>
-    </div>
+    <div class="hl fi"><p>Every supplier is physically verified. Every product is cataloged with real pricing.</p></div>
   </div>
 
   <!-- 6. TECHNOLOGY -->
   <div class="slide" data-i="5">
-    <div class="tag fade-in">Who We Are</div>
-    <h2 class="fade-in">Technology</h2>
-    <p class="sub fade-in">Proprietary AI stack built for Iraqi procurement</p>
-    <div class="grid-3 fade-in">
-      <div class="card">
-        <div class="icon-circle blue"><svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="m10 13 2 2 4-4"/></svg></div>
-        <h3>Document Parsing</h3>
-        <p style="font-size:0.85rem">Reads BOQs in PDF, Excel, or scanned images. Extracts items, quantities, and specs automatically.</p>
-      </div>
-      <div class="card">
-        <div class="icon-circle purple"><svg viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></div>
-        <h3>Computer Vision</h3>
-        <p style="font-size:0.85rem">Product recognition from photos. Identifies brands, models, and specs from showroom images.</p>
-      </div>
-      <div class="card">
-        <div class="icon-circle green"><svg viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
-        <h3>Smart Matching</h3>
-        <p style="font-size:0.85rem">Intelligent supplier matching by location, price, availability, and quality. Best fit, every time.</p>
-      </div>
+    <div class="tag fi">Who We Are</div>
+    <h2 class="fi">Technology</h2>
+    <p class="sub fi">Proprietary AI stack built for Iraqi procurement.</p>
+    <div class="g3 fi">
+      <div class="card"><h3>Document Parsing</h3><p>Reads BOQs from PDF, Excel, or scanned images. Extracts items, quantities, and specs automatically using OCR + AI.</p></div>
+      <div class="card"><h3>Computer Vision</h3><p>Product recognition from photos. Upload an image — our system identifies the brand, model, and price from the catalog.</p></div>
+      <div class="card"><h3>Smart Matching</h3><p>Matches each item to the best supplier by location, price, availability, and quality score. Best fit, every time.</p></div>
     </div>
   </div>
 
   <!-- 7. MARKET SIZE -->
-  <div class="slide" data-i="6">
-    <div class="tag fade-in">The Opportunity</div>
-    <h2 class="fade-in">Market <span class="gradient-text">Size</span></h2>
-    <div class="grid-3 fade-in">
-      <div class="stat"><div class="num glow-accent">$25-35B</div><div class="lbl">Construction Market</div></div>
-      <div class="stat"><div class="num glow-purple">8%+</div><div class="lbl">Annual Growth</div></div>
-      <div class="stat"><div class="num glow-green">0</div><div class="lbl">Direct Competitors</div></div>
+  <div class="slide dark" data-i="6">
+    <div class="tag fi">The Opportunity</div>
+    <h2 class="fi" style="color:white">Market Size</h2>
+    <div class="g3 fi" style="margin-top:16px">
+      <div class="stat"><div class="n" style="color:white">$25–35B</div><div class="l" style="color:#64748B">Construction Market</div></div>
+      <div class="stat"><div class="n" style="color:white">8%+</div><div class="l" style="color:#64748B">Annual Growth</div></div>
+      <div class="stat"><div class="n" style="color:white">0</div><div class="l" style="color:#64748B">Direct Competitors</div></div>
     </div>
-    <div class="grid-2 fade-in" style="margin-top:20px">
-      <div class="card"><h3 style="color:var(--accent)">Growth Drivers</h3><ul><li>Post-conflict reconstruction investment</li><li>Government housing mega-projects</li><li>Private sector real estate boom</li><li>Rising foreign direct investment</li></ul></div>
-      <div class="card"><h3 style="color:var(--accent2)">Why Now</h3><ul><li>Mobile internet at all-time high</li><li>Young, tech-adopting population</li><li>No incumbent digital platform</li><li>Market ready for transformation</li></ul></div>
+    <div class="g2 fi" style="margin-top:20px">
+      <div class="card"><h3 style="color:white">Growth Drivers</h3><ul><li>Post-conflict reconstruction</li><li>Government mega-projects</li><li>Private real estate boom</li><li>Foreign investment rising</li></ul></div>
+      <div class="card"><h3 style="color:white">Why Now</h3><ul><li>Mobile at all-time high</li><li>Young, tech-adopting population</li><li>No incumbent platform</li><li>Ready for transformation</li></ul></div>
     </div>
   </div>
 
   <!-- 8. THE GAP -->
   <div class="slide" data-i="7">
-    <div class="tag fade-in">The Opportunity</div>
-    <h2 class="fade-in">The <span class="gradient-text">Gap</span></h2>
-    <p class="sub fade-in" style="text-align:center;max-width:100%">No digital B2B procurement platform exists in Iraq</p>
-    <div class="gap-row fade-in">
-      <div class="gap-box"><p style="font-size:0.75rem;color:var(--gray-dim);text-transform:uppercase;letter-spacing:0.1em">Today</p><p style="font-size:1.6rem;font-weight:700;color:var(--white);font-family:Poppins,sans-serif;margin:8px 0">Manual</p><p style="font-size:0.82rem;color:var(--gray)">Phone, WhatsApp, visits</p></div>
-      <div class="gap-bridge"><div class="blbl">VisionNetworking</div><div class="line"></div></div>
-      <div class="gap-box active"><p style="font-size:0.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em">Tomorrow</p><p style="font-size:1.6rem;font-weight:700;font-family:Poppins,sans-serif;margin:8px 0" class="gradient-text">Digital</p><p style="font-size:0.82rem;color:var(--gray)">AI-powered, instant, transparent</p></div>
+    <div class="tag fi">The Opportunity</div>
+    <h2 class="fi">The Gap</h2>
+    <p class="sub fi" style="text-align:center;max-width:100%">No digital B2B procurement platform exists in Iraq.</p>
+    <div class="gap-row fi">
+      <div class="gap-b"><p style="font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-dim);font-weight:600">Today</p><p style="font-size:1.4rem;font-weight:700;color:var(--navy);font-family:Poppins,sans-serif;margin:6px 0">Manual</p><p style="font-size:.8rem;color:var(--text-sec)">Phone, WhatsApp, visits</p></div>
+      <div class="gap-m"><div class="lb">VisionNetworking</div><div class="ln"></div></div>
+      <div class="gap-b hi"><p style="font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--blue);font-weight:600">Tomorrow</p><p style="font-size:1.4rem;font-weight:700;color:var(--blue);font-family:Poppins,sans-serif;margin:6px 0">Digital</p><p style="font-size:.8rem;color:var(--text-sec)">AI-powered, instant, transparent</p></div>
     </div>
-    <div class="highlight fade-in">
-      <p>VisionNetworking is the first — and only — platform addressing this gap. The window is now.</p>
-    </div>
+    <div class="hl fi"><p>We are the first — and currently only — platform addressing this gap.</p></div>
   </div>
 
-  <!-- 9. TARGET AUDIENCE -->
+  <!-- 9. TARGET -->
   <div class="slide" data-i="8">
-    <div class="tag fade-in">The Opportunity</div>
-    <h2 class="fade-in">Target Audience</h2>
-    <div class="grid-2 fade-in">
-      <div class="card"><h3 style="color:var(--accent)">Primary Users</h3><ul><li><strong style="color:var(--white)">Contractors</strong> — general &amp; specialized firms</li><li><strong style="color:var(--white)">Project Managers</strong> — overseeing large builds</li><li><strong style="color:var(--white)">Procurement Officers</strong> — daily sourcing</li><li><strong style="color:var(--white)">Business Owners</strong> — commercial projects</li></ul></div>
-      <div>
-        <div class="grid-2" style="margin-top:0;gap:14px">
-          <div class="stat"><div class="num glow-accent" style="font-size:2rem">50K+</div><div class="lbl">Contractors</div></div>
-          <div class="stat"><div class="num glow-purple" style="font-size:2rem">10K+</div><div class="lbl">Suppliers</div></div>
-        </div>
-        <p style="margin-top:16px;font-size:0.88rem;color:var(--gray)">Every construction project in Iraq requires procurement. Our addressable market spans the entire industry.</p>
-      </div>
+    <div class="tag fi">The Opportunity</div>
+    <h2 class="fi">Target Audience</h2>
+    <div class="g2 fi">
+      <div class="card"><h3>Primary Users</h3><ul><li><strong style="color:var(--text)">Contractors</strong> — general &amp; specialized</li><li><strong style="color:var(--text)">Project Managers</strong> — large builds</li><li><strong style="color:var(--text)">Procurement Officers</strong> — daily sourcing</li><li><strong style="color:var(--text)">Business Owners</strong> — commercial projects</li></ul></div>
+      <div><div class="g2" style="margin-top:0;gap:12px"><div class="stat stat-bordered"><div class="n" style="font-size:1.8rem">50K+</div><div class="l">Contractors</div></div><div class="stat stat-bordered"><div class="n" style="font-size:1.8rem">10K+</div><div class="l">Suppliers</div></div></div><p style="margin-top:14px;font-size:.85rem">Every construction project requires procurement. Our market spans the entire industry.</p></div>
     </div>
   </div>
 
-  <!-- 10. DIGITAL LANDSCAPE -->
+  <!-- 10. DIGITAL -->
   <div class="slide" data-i="9">
-    <div class="tag fade-in">The Opportunity</div>
-    <h2 class="fade-in">Digital Landscape</h2>
-    <p class="sub fade-in">Where our audience lives online</p>
-    <div class="ch-grid fade-in">
-      <div class="ch"><div class="cn">Facebook</div><div class="cs">#1 Social Platform</div><div class="cd">Primary discovery channel. Groups massive for B2B.</div></div>
-      <div class="ch"><div class="cn">WhatsApp</div><div class="cs">Business Critical</div><div class="cd">All business happens here. Must integrate.</div></div>
-      <div class="ch"><div class="cn">Mobile-First</div><div class="cs">93% Mobile</div><div class="cd">Everything designed mobile-first. Desktop secondary.</div></div>
-      <div class="ch"><div class="cn">Arabic-First</div><div class="cs">Primary Language</div><div class="cd">All content must lead with Arabic.</div></div>
-      <div class="ch"><div class="cn">YouTube</div><div class="cs">High Engagement</div><div class="cd">Video performs well. Demos, tutorials.</div></div>
-      <div class="ch"><div class="cn">Instagram</div><div class="cs">Growing Fast</div><div class="cd">Product showcases and brand building.</div></div>
+    <div class="tag fi">The Opportunity</div>
+    <h2 class="fi">Digital Landscape in Iraq</h2>
+    <div class="ch-g fi">
+      <div class="ch"><div class="cn">Facebook</div><div class="cs">#1 Social Platform</div><div class="cd">Primary discovery. Groups huge for B2B.</div></div>
+      <div class="ch"><div class="cn">WhatsApp</div><div class="cs">Business Critical</div><div class="cd">All business communication here.</div></div>
+      <div class="ch"><div class="cn">Mobile-First</div><div class="cs">93% Mobile</div><div class="cd">Everything must be mobile-first.</div></div>
+      <div class="ch"><div class="cn">Arabic-First</div><div class="cs">Primary Language</div><div class="cd">Content must lead with Arabic.</div></div>
+      <div class="ch"><div class="cn">YouTube</div><div class="cs">High Engagement</div><div class="cd">Video performs well for demos.</div></div>
+      <div class="ch"><div class="cn">Instagram</div><div class="cs">Growing</div><div class="cd">Product showcases, brand building.</div></div>
     </div>
   </div>
 
   <!-- 11. WHAT WE BRING -->
   <div class="slide" data-i="10">
-    <div class="tag fade-in">The Partnership</div>
-    <h2 class="fade-in">What We <span class="gradient-text">Bring</span></h2>
-    <div class="grid-2 fade-in">
-      <div class="card"><h3 style="color:var(--accent)">Platform &amp; Technology</h3><ul><li>AI-powered procurement platform</li><li>Mobile-optimized web app</li><li>Admin dashboard &amp; analytics</li><li>WhatsApp Business API</li></ul></div>
-      <div class="card"><h3 style="color:var(--accent2)">Network &amp; Expertise</h3><ul><li>38 verified supplier buildings</li><li>100+ active brand partnerships</li><li>Deep Iraqi procurement knowledge</li><li>Real pricing data &amp; catalog</li></ul></div>
+    <div class="tag fi">The Partnership</div>
+    <h2 class="fi">What We Bring</h2>
+    <div class="g2 fi">
+      <div class="card"><h3>Platform &amp; Technology</h3><ul><li>AI-powered procurement platform</li><li>Mobile-optimized web app</li><li>Admin dashboard &amp; analytics</li><li>WhatsApp Business API</li></ul></div>
+      <div class="card"><h3>Network &amp; Expertise</h3><ul><li>38 verified buildings</li><li>100+ brand partnerships</li><li>Deep Iraqi market knowledge</li><li>Real pricing data &amp; catalog</li></ul></div>
     </div>
   </div>
 
   <!-- 12. WHAT WE NEED -->
   <div class="slide" data-i="11">
-    <div class="tag fade-in">The Partnership</div>
-    <h2 class="fade-in">What We <span class="gradient-text">Need</span></h2>
-    <p class="sub fade-in">A strategic marketing partner to accelerate growth</p>
-    <div class="grid-2 fade-in" style="margin-top:16px">
-      <div class="card"><h3 style="color:var(--accent)">Brand &amp; Creative</h3><ul><li>Brand identity &amp; visual language</li><li>Content strategy &amp; production</li><li>Social media management</li><li>Video &amp; photography</li></ul></div>
-      <div class="card"><h3 style="color:var(--accent2)">Growth &amp; Performance</h3><ul><li>Paid ads (Facebook, Google, YouTube)</li><li>SEO &amp; organic strategy</li><li>Lead generation campaigns</li><li>WhatsApp marketing automation</li></ul></div>
+    <div class="tag fi">The Partnership</div>
+    <h2 class="fi">What We Need</h2>
+    <p class="sub fi">A strategic marketing partner to accelerate growth.</p>
+    <div class="g2 fi">
+      <div class="card"><h3>Brand &amp; Creative</h3><ul><li>Brand identity &amp; visual language</li><li>Content strategy &amp; production</li><li>Social media management</li><li>Video &amp; photography</li></ul></div>
+      <div class="card"><h3>Growth &amp; Performance</h3><ul><li>Paid ads (Facebook, Google, YouTube)</li><li>SEO &amp; organic strategy</li><li>Lead generation</li><li>WhatsApp marketing</li></ul></div>
     </div>
-    <div class="grid-2 fade-in">
-      <div class="card"><h3 style="color:var(--accent3)">Offline &amp; PR</h3><ul><li>Trade shows &amp; events</li><li>Press &amp; media outreach</li><li>Print materials</li></ul></div>
-      <div class="card"><h3 style="color:#fb923c">Analytics</h3><ul><li>Performance tracking</li><li>Monthly reporting</li><li>A/B testing &amp; optimization</li></ul></div>
+    <div class="g2 fi">
+      <div class="card"><h3>Offline &amp; PR</h3><ul><li>Trade shows &amp; events</li><li>Press &amp; media outreach</li><li>Print materials</li></ul></div>
+      <div class="card"><h3>Analytics</h3><ul><li>Performance tracking</li><li>Monthly reporting</li><li>A/B testing &amp; optimization</li></ul></div>
     </div>
   </div>
 
   <!-- 13. DELIVERABLES -->
   <div class="slide" data-i="12">
-    <div class="tag fade-in">The Partnership</div>
-    <h2 class="fade-in">Deliverables</h2>
-    <table class="tbl fade-in">
+    <div class="tag fi">The Partnership</div>
+    <h2 class="fi">Deliverables</h2>
+    <table class="tbl fi">
       <thead><tr><th>Deliverable</th><th>Frequency</th><th>Details</th></tr></thead>
       <tbody>
-        <tr><td>Blog Articles</td><td>4 / month</td><td>SEO, Arabic &amp; English, industry topics</td></tr>
+        <tr><td>Blog Articles</td><td>4 / month</td><td>SEO, Arabic &amp; English</td></tr>
         <tr><td>Video Content</td><td>2 / month</td><td>Demos, testimonials, tutorials</td></tr>
-        <tr><td>Social Media</td><td>Daily</td><td>Facebook, Instagram, LinkedIn — Arabic-first</td></tr>
-        <tr><td>Paid Campaigns</td><td>Ongoing</td><td>Facebook, Google, YouTube pre-roll</td></tr>
-        <tr><td>WhatsApp Campaigns</td><td>2 / month</td><td>Broadcast lists, auto-sequences</td></tr>
-        <tr><td>Performance Report</td><td>Monthly</td><td>KPIs, insights, next-month plan</td></tr>
-        <tr><td>SEO Updates</td><td>Monthly</td><td>Technical SEO, keyword tracking</td></tr>
+        <tr><td>Social Media</td><td>Daily</td><td>Facebook, Instagram, LinkedIn</td></tr>
+        <tr><td>Paid Campaigns</td><td>Ongoing</td><td>Facebook, Google, YouTube</td></tr>
+        <tr><td>WhatsApp Campaigns</td><td>2 / month</td><td>Broadcasts, auto-sequences</td></tr>
+        <tr><td>Performance Report</td><td>Monthly</td><td>KPIs, insights, plan</td></tr>
+        <tr><td>SEO Updates</td><td>Monthly</td><td>Technical + content optimization</td></tr>
       </tbody>
     </table>
   </div>
 
   <!-- 14. TIMELINE -->
   <div class="slide" data-i="13">
-    <div class="tag fade-in">The Partnership</div>
-    <h2 class="fade-in">Timeline</h2>
-    <div class="phases fade-in">
-      <div class="phase"><div class="plbl">Phase 1</div><h3>Foundation</h3><div class="pdate">Months 1–3</div><ul><li>Brand identity</li><li>Content calendar</li><li>Social launch</li><li>SEO baseline</li><li>First ad campaigns</li></ul></div>
-      <div class="phase"><div class="plbl">Phase 2</div><h3>Growth</h3><div class="pdate">Months 4–6</div><ul><li>Scale paid campaigns</li><li>Influencer partnerships</li><li>First trade shows</li><li>WhatsApp automation</li><li>Video series</li></ul></div>
-      <div class="phase"><div class="plbl">Phase 3</div><h3>Scale</h3><div class="pdate">Months 7–12</div><ul><li>Full-funnel optimization</li><li>Geographic expansion</li><li>PR campaign</li><li>Community building</li><li>Performance scaling</li></ul></div>
+    <div class="tag fi">The Partnership</div>
+    <h2 class="fi">Timeline</h2>
+    <div class="phases fi">
+      <div class="ph"><div class="plbl">Phase 1</div><h3>Foundation</h3><div class="pdate">Months 1–3</div><ul><li>Brand identity</li><li>Content calendar</li><li>Social launch</li><li>SEO baseline</li><li>First campaigns</li></ul></div>
+      <div class="ph"><div class="plbl">Phase 2</div><h3>Growth</h3><div class="pdate">Months 4–6</div><ul><li>Scale campaigns</li><li>Influencer outreach</li><li>Trade shows</li><li>WhatsApp automation</li><li>Video series</li></ul></div>
+      <div class="ph"><div class="plbl">Phase 3</div><h3>Scale</h3><div class="pdate">Months 7–12</div><ul><li>Full-funnel optimization</li><li>Geographic expansion</li><li>PR campaign</li><li>Community building</li><li>Performance scaling</li></ul></div>
     </div>
   </div>
 
   <!-- 15. KPIs -->
   <div class="slide" data-i="14">
-    <div class="tag fade-in">The Partnership</div>
-    <h2 class="fade-in">Success Metrics</h2>
-    <div class="kpi-grid fade-in">
+    <div class="tag fi">The Partnership</div>
+    <h2 class="fi">Success Metrics</h2>
+    <div class="kpi-g fi">
       <div class="kpi"><div class="kn">Qualified Leads</div><div class="kt">200+ / month by M6</div></div>
-      <div class="kpi"><div class="kn">Cost Per Lead</div><div class="kt">-30% quarter-over-quarter</div></div>
-      <div class="kpi"><div class="kn">ROAS</div><div class="kt">4x return on ad spend</div></div>
+      <div class="kpi"><div class="kn">Cost Per Lead</div><div class="kt">-30% QoQ</div></div>
+      <div class="kpi"><div class="kn">ROAS</div><div class="kt">4x return</div></div>
       <div class="kpi"><div class="kn">Website Traffic</div><div class="kt">10K monthly by M6</div></div>
-      <div class="kpi"><div class="kn">Engagement Rate</div><div class="kt">5% average social</div></div>
-      <div class="kpi"><div class="kn">Conversion Rate</div><div class="kt">8% visitor-to-lead</div></div>
-      <div class="kpi"><div class="kn">Brand Reach</div><div class="kt">50K / month by M6</div></div>
-      <div class="kpi"><div class="kn">New Suppliers</div><div class="kt">20 onboarded / month</div></div>
+      <div class="kpi"><div class="kn">Engagement</div><div class="kt">5% avg social</div></div>
+      <div class="kpi"><div class="kn">Conversion</div><div class="kt">8% visitor-to-lead</div></div>
+      <div class="kpi"><div class="kn">Reach</div><div class="kt">50K / month by M6</div></div>
+      <div class="kpi"><div class="kn">Suppliers</div><div class="kt">20 new / month</div></div>
     </div>
   </div>
 
-  <!-- 16. WHY PARTNER -->
+  <!-- 16. WHY -->
   <div class="slide" data-i="15">
-    <div class="tag fade-in">Next Steps</div>
-    <h2 class="fade-in">Why <span class="gradient-text">Partner</span> With Us</h2>
-    <div class="reasons fade-in">
-      <div class="reason"><div class="reason-n">1</div><div><h4>First Mover</h4><p>Building the category. No incumbent to compete with.</p></div></div>
-      <div class="reason"><div class="reason-n">2</div><div><h4>Zero Competition</h4><p>No direct digital competitor in Iraq's procurement space.</p></div></div>
-      <div class="reason"><div class="reason-n">3</div><div><h4>$25-35B Market</h4><p>8%+ growth, rising digital adoption, massive opportunity.</p></div></div>
-      <div class="reason"><div class="reason-n">4</div><div><h4>AI-Powered</h4><p>Real technology that delivers speed, accuracy, cost savings.</p></div></div>
-      <div class="reason"><div class="reason-n">5</div><div><h4>Proven Network</h4><p>38 buildings, 100+ brands already on board. Real traction.</p></div></div>
-      <div class="reason"><div class="reason-n">6</div><div><h4>Immediate Impact</h4><p>Your work will have visible results from day one.</p></div></div>
+    <div class="tag fi">Next Steps</div>
+    <h2 class="fi">Why Partner With Us</h2>
+    <div class="reasons fi">
+      <div class="rsn"><div class="rsn-n">1</div><div><h4>First Mover</h4><p>Building the category. No incumbent.</p></div></div>
+      <div class="rsn"><div class="rsn-n">2</div><div><h4>Zero Competition</h4><p>No digital competitor in Iraq.</p></div></div>
+      <div class="rsn"><div class="rsn-n">3</div><div><h4>$25–35B Market</h4><p>8%+ growth, rising digital adoption.</p></div></div>
+      <div class="rsn"><div class="rsn-n">4</div><div><h4>AI-Powered</h4><p>Real tech delivering real value.</p></div></div>
+      <div class="rsn"><div class="rsn-n">5</div><div><h4>Proven Network</h4><p>38 buildings, 100+ brands on board.</p></div></div>
+      <div class="rsn"><div class="rsn-n">6</div><div><h4>Immediate Impact</h4><p>Visible results from day one.</p></div></div>
     </div>
   </div>
 
   <!-- 17. NEXT STEPS -->
   <div class="slide" data-i="16">
-    <div class="tag fade-in">Next Steps</div>
-    <h2 class="fade-in">Next Steps</h2>
-    <p class="sub fade-in">Let's move forward together</p>
-    <div class="steps fade-in">
-      <div class="step-row"><div class="sn">1</div><div><strong>Review Statement of Work</strong><span>Detailed SOW with scope, deliverables, and expectations</span></div></div>
-      <div class="step-row"><div class="sn">2</div><div><strong>Discuss Budget &amp; Pricing</strong><span>Investment, payment terms, performance incentives</span></div></div>
-      <div class="step-row"><div class="sn">3</div><div><strong>Kickoff Meeting</strong><span>Brand, audience, channels, and first-month plan</span></div></div>
-      <div class="step-row"><div class="sn">4</div><div><strong>Launch Phase 1</strong><span>Brand, content, social, and first campaigns go live</span></div></div>
+    <div class="tag fi">Next Steps</div>
+    <h2 class="fi">Next Steps</h2>
+    <div class="steps fi">
+      <div class="srow"><div class="sn">1</div><div><strong>Review Statement of Work</strong><span>Detailed SOW with scope, deliverables, expectations</span></div></div>
+      <div class="srow"><div class="sn">2</div><div><strong>Discuss Budget &amp; Pricing</strong><span>Investment, payment terms, incentives</span></div></div>
+      <div class="srow"><div class="sn">3</div><div><strong>Kickoff Meeting</strong><span>Brand, audience, channels, first-month plan</span></div></div>
+      <div class="srow"><div class="sn">4</div><div><strong>Launch Phase 1</strong><span>Brand, content, social, first campaigns live</span></div></div>
     </div>
-    <div class="highlight fade-in">
-      <p>We're looking for a partner, not a vendor. Someone who believes in the vision and wants to build something historic.</p>
-    </div>
+    <div class="hl fi"><p>We're looking for a partner, not a vendor. Someone who wants to build something historic in the Iraqi market.</p></div>
   </div>
 
   <!-- 18. CONTACT -->
-  <div class="slide title-center" data-i="17">
-    <div class="logo fade-in">
-      <div class="logo-box">VN</div>
-      <div class="logo-name">VisionNetworking</div>
+  <div class="slide dark tc" data-i="17">
+    <div class="logo fi"><div class="logo-b">VN</div><div class="logo-t">VisionNetworking</div></div>
+    <h2 class="fi" style="color:white;font-size:2.2rem">Let's Build the Future of<br>Iraqi Procurement.</h2>
+    <div class="divider fi"></div>
+    <div class="c-row fi">
+      <div class="c-item"><div class="cl">Location</div><div class="cv">Baghdad, Iraq</div></div>
+      <div class="c-item"><div class="cl">Email</div><div class="cv">info@visionnetworking.iq</div></div>
+      <div class="c-item"><div class="cl">Phone</div><div class="cv">+964 XXX XXX XXXX</div></div>
+      <div class="c-item"><div class="cl">Web</div><div class="cv">visionnetworking.iq</div></div>
     </div>
-    <h2 class="fade-in">Let's Build the Future of<br><span class="gradient-text">Iraqi Procurement</span></h2>
-    <div class="title-line fade-in"></div>
-    <div class="contact-row fade-in">
-      <div class="contact-item"><div class="cl">Location</div><div class="cv">Baghdad, Iraq</div></div>
-      <div class="contact-item"><div class="cl">Email</div><div class="cv">info@visionnetworking.iq</div></div>
-      <div class="contact-item"><div class="cl">Phone</div><div class="cv">+964 XXX XXX XXXX</div></div>
-      <div class="contact-item"><div class="cl">Web</div><div class="cv">visionnetworking.iq</div></div>
-    </div>
-    <p class="fade-in" style="margin-top:48px;font-size:0.75rem;color:var(--gray-dim)">Confidential &middot; April 2026</p>
+    <p class="fi" style="margin-top:40px;font-size:.72rem;color:#64748B">Confidential &middot; April 2026</p>
   </div>
 
 </div>
 
 <div class="nav">
   <span class="cnt" id="cnt">1 / 18</span>
-  <button id="pBtn" onclick="go(-1)" disabled>&#8592;</button>
-  <button id="nBtn" onclick="go(1)">&#8594;</button>
+  <button id="pB" onclick="go(-1)" disabled>&#8592;</button>
+  <button id="nB" onclick="go(1)">&#8594;</button>
 </div>
 
 <script>
 (function(){
   const S=document.querySelectorAll('.slide'),T=S.length;let C=0;
-  const cnt=document.getElementById('cnt'),pB=document.getElementById('pBtn'),nB=document.getElementById('nBtn'),pr=document.getElementById('prog');
+  const cnt=document.getElementById('cnt'),pB=document.getElementById('pB'),nB=document.getElementById('nB'),pr=document.getElementById('prog');
   function u(){S.forEach((s,i)=>{s.classList.remove('active');if(i===C)s.classList.add('active')});cnt.textContent=(C+1)+' / '+T;pB.disabled=C===0;nB.disabled=C===T-1;pr.style.width=((C+1)/T*100)+'%'}
   window.go=function(d){const n=C+d;if(n>=0&&n<T){C=n;u()}};
   document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' '){e.preventDefault();go(1)}else if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();go(-1)}else if(e.key==='Home'){e.preventDefault();C=0;u()}else if(e.key==='End'){e.preventDefault();C=T-1;u()}});
