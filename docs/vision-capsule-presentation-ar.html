@@ -78,8 +78,13 @@ ul li::before{content:'';position:absolute;right:0;top:10px;width:4px;height:4px
 .content{position:relative;z-index:1;padding:48px 72px}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:18px}
-.split{display:grid;grid-template-columns:1fr 1fr;height:100%}
-.split .side{display:flex;flex-direction:column;justify-content:center;padding:48px 56px}
+.split{display:flex;flex-direction:column;height:100%;justify-content:center;padding:48px 72px;gap:24px}
+.split .side{display:flex;flex-direction:column;justify-content:center}
+.split .img-pano{width:100%;border-radius:8px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.3);max-height:38vh}
+.split .img-pano img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
+.split .img-pano:hover img{transform:scale(1.03)}
+.split-h{display:grid;grid-template-columns:1fr 1fr;height:100%}
+.split-h .side{display:flex;flex-direction:column;justify-content:center;padding:48px 56px}
 
 /* Cards */
 .card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:22px;backdrop-filter:blur(4px);transition:transform .3s,border-color .3s}
@@ -117,9 +122,13 @@ ul li::before{content:'';position:absolute;right:0;top:10px;width:4px;height:4px
 
 /* Title */
 .tc{text-align:center;align-items:center}
-.logo{display:inline-flex;align-items:center;gap:10px;margin-bottom:24px}
+.logo{display:inline-flex;align-items:center;gap:14px;margin-bottom:24px}
 .logo-b{width:44px;height:44px;background:var(--accent);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:.95rem;font-weight:800;color:var(--bg)}
 .logo-t{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:600;letter-spacing:.5px}
+.logo-sep{width:1px;height:28px;background:rgba(255,255,255,.1)}
+.jegr{display:flex;flex-direction:column;align-items:center;line-height:1}
+.jegr-main{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:800;color:#C86B28;letter-spacing:-.01em}
+.jegr-sub{font-family:'Inter',sans-serif;font-size:.38rem;font-weight:700;color:#C86B28;letter-spacing:.16em;text-transform:uppercase;margin-top:2px}
 .divider{width:36px;height:1px;background:var(--accent);margin:14px auto}
 
 /* Contact */
@@ -157,7 +166,7 @@ ul li::before{content:'';position:absolute;right:0;top:10px;width:4px;height:4px
   <div class="img-bg kb"><img src="capsule-imgs/p7.jpg" alt=""></div>
   <div class="img-bg darken"></div>
   <div class="content fi" style="position:relative;z-index:1;padding-top:0">
-    <div class="logo fi"><div class="logo-b">VC</div><div class="logo-t">VISION CAPSULE</div></div>
+    <div class="logo fi"><div class="logo-b">VC</div><div class="logo-t">VISION CAPSULE</div><div class="logo-sep"></div><div class="jegr"><div class="jegr-main">JEGR</div><div class="jegr-sub">For Lighting</div></div></div>
     <h1 class="fi" style="font-size:4rem;margin-bottom:6px">عيش <span class="accent">المستقبل</span></h1>
     <div class="divider fi"></div>
     <p class="fi" style="font-size:1rem;color:var(--gray);max-width:360px;margin:0 auto">وحدات سكنية كبسولية فاخرة<br>مُصنّعة في كوردستان العراق</p>
@@ -165,20 +174,18 @@ ul li::before{content:'';position:absolute;right:0;top:10px;width:4px;height:4px
   </div>
 </div>
 
-<!-- ═══ 2. ABOUT — split layout, image right ═══ -->
+<!-- ═══ 2. ABOUT — panoramic image top, text below ═══ -->
 <div class="slide" data-i="1">
   <div class="split">
-    <div class="side">
-      <div class="tag fi">من نحن</div>
-      <h2 class="fi">فيجن <span class="accent">كبسول</span></h2>
-      <p class="sub fi" style="margin-top:10px">نُصمّم ونُصنّع وحدات سكنية كبسولية عصرية بالكامل في كوردستان العراق — تجربة إقامة مبتكرة للمنتجعات والسياحة.</p>
-      <div class="fi" style="margin-top:20px">
-        <div class="card" style="margin-bottom:8px"><h3 class="accent">رؤيتنا</h3><p style="font-size:.82rem">مستقبل السياحة العصرية — وحدات ذكية تجمع الطبيعة والتكنولوجيا.</p></div>
+    <div class="img-pano fi" onclick="zoom(this)"><img src="capsule-imgs/p10.jpg" alt="Resort"></div>
+    <div class="fi">
+      <div class="tag">من نحن</div>
+      <h2>فيجن <span class="accent">كبسول</span></h2>
+      <p class="sub" style="margin-top:8px;max-width:100%">نُصمّم ونُصنّع وحدات سكنية كبسولية عصرية بالكامل في كوردستان العراق — تجربة إقامة مبتكرة للمنتجعات والسياحة.</p>
+      <div class="g2" style="margin-top:14px">
+        <div class="card"><h3 class="accent">رؤيتنا</h3><p style="font-size:.82rem">مستقبل السياحة العصرية — وحدات ذكية تجمع الطبيعة والتكنولوجيا.</p></div>
         <div class="card"><h3 class="accent">رسالتنا</h3><p style="font-size:.82rem">مساحات إقامة تربط الناس بالطبيعة والثقافة المحلية.</p></div>
       </div>
-    </div>
-    <div style="position:relative;overflow:hidden">
-      <div class="img-bg pan" style="position:absolute;inset:0"><img src="capsule-imgs/p10.jpg" alt=""></div>
     </div>
   </div>
 </div>
@@ -217,16 +224,14 @@ ul li::before{content:'';position:absolute;right:0;top:10px;width:4px;height:4px
   </div>
 </div>
 
-<!-- ═══ 5. SPECS — split: text + framed construction image ═══ -->
+<!-- ═══ 5. SPECS — image top, specs below ═══ -->
 <div class="slide" data-i="4">
   <div class="split">
-    <div style="position:relative;overflow:hidden">
-      <div class="img-bg kb" style="position:absolute;inset:0"><img src="capsule-imgs/p5.jpg" alt=""></div>
-    </div>
-    <div class="side">
-      <div class="tag fi">المواصفات الفنية</div>
-      <h2 class="fi">جودة بناء <span class="accent">عالية</span></h2>
-      <div class="fi" style="margin-top:12px">
+    <div class="img-pano fi" onclick="zoom(this)"><img src="capsule-imgs/p5.jpg" alt="Construction"></div>
+    <div class="fi">
+      <div class="tag">المواصفات الفنية</div>
+      <h2>جودة بناء <span class="accent">عالية</span></h2>
+      <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:0 32px">
         <div class="spec"><div class="spec-dot"></div><div><strong>هيكل معدني صلب</strong><span>— إطار حديد مقاوم</span></div></div>
         <div class="spec"><div class="spec-dot"></div><div><strong>زجاج مزدوج عازل</strong><span>— عزل حراري وصوتي</span></div></div>
         <div class="spec"><div class="spec-dot"></div><div><strong>ألواح ألمنيوم خارجية</strong><span>— مقاومة للعوامل الجوية</span></div></div>
@@ -237,15 +242,18 @@ ul li::before{content:'';position:absolute;right:0;top:10px;width:4px;height:4px
   </div>
 </div>
 
-<!-- ═══ 6. GALLERY — stacked overlapping images ═══ -->
-<div class="slide tc" data-i="5">
-  <div class="content">
+<!-- ═══ 6. GALLERY — horizontal panoramic grid ═══ -->
+<div class="slide" data-i="5">
+  <div class="content" style="padding:40px 56px">
     <div class="tag fi">معرض الصور</div>
     <h2 class="fi"><span class="accent">فيجن كبسول</span> في الطبيعة</h2>
-    <div class="stack fi" style="margin-top:28px">
-      <div class="simg" style="width:55%;height:85%;top:0;right:0;z-index:3;border:2px solid rgba(184,150,90,.15)" onclick="zoom(this)"><img src="capsule-imgs/p9.jpg"></div>
-      <div class="simg" style="width:42%;height:55%;top:5%;left:0;z-index:2;transform:rotate(-2deg)" onclick="zoom(this)"><img src="capsule-imgs/p8.jpg"></div>
-      <div class="simg" style="width:38%;height:48%;bottom:0;left:8%;z-index:1;transform:rotate(1.5deg)" onclick="zoom(this)"><img src="capsule-imgs/p11.jpg"></div>
+    <div class="fi" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px">
+      <div class="img-framed" onclick="zoom(this)" style="cursor:pointer"><img src="capsule-imgs/p9.jpg"><div class="img-tag">في الحدائق</div></div>
+      <div class="img-framed" onclick="zoom(this)" style="cursor:pointer"><img src="capsule-imgs/p8.jpg"><div class="img-tag">رؤية ليلية</div></div>
+    </div>
+    <div class="fi" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+      <div class="img-framed" onclick="zoom(this)" style="cursor:pointer"><img src="capsule-imgs/p10.jpg"><div class="img-tag">منتجع</div></div>
+      <div class="img-framed" onclick="zoom(this)" style="cursor:pointer"><img src="capsule-imgs/p11.jpg"><div class="img-tag">قرية كبسولية</div></div>
     </div>
   </div>
 </div>
@@ -269,51 +277,90 @@ ul li::before{content:'';position:absolute;right:0;top:10px;width:4px;height:4px
   </div>
 </div>
 
-<!-- ═══ 8. WHY US — split with lifestyle image ═══ -->
+<!-- ═══ 8. WHY US — image top, cards below ═══ -->
 <div class="slide" data-i="7">
   <div class="split">
-    <div class="side">
-      <div class="tag fi">لماذا نحن</div>
-      <h2 class="fi">لماذا <span class="accent">فيجن كبسول؟</span></h2>
-      <div class="fi" style="margin-top:14px;display:flex;flex-direction:column;gap:8px">
+    <div class="img-pano fi" onclick="zoom(this)"><img src="capsule-imgs/p9.jpg" alt="Garden"></div>
+    <div class="fi">
+      <div class="tag">لماذا نحن</div>
+      <h2>لماذا <span class="accent">فيجن كبسول؟</span></h2>
+      <div class="g2" style="margin-top:12px">
         <div class="card"><h3 class="accent">صناعة محلية</h3><p style="font-size:.82rem">مُصنّعة بالكامل في كوردستان — ندعم الصناعة ونوفر التكاليف.</p></div>
         <div class="card"><h3 class="accent">سرعة التسليم</h3><p style="font-size:.82rem">جاهزة خلال أسابيع — بدون انتظار أشهر.</p></div>
         <div class="card"><h3 class="accent">تصميم عصري</h3><p style="font-size:.82rem">واجهات زجاجية بانورامية وإطلالة كاملة.</p></div>
         <div class="card"><h3 class="accent">جودة عالمية</h3><p style="font-size:.82rem">معايير دولية مع ضمان على الهيكل.</p></div>
       </div>
     </div>
-    <div style="position:relative;overflow:hidden">
-      <div class="img-bg pan" style="position:absolute;inset:0"><img src="capsule-imgs/p9.jpg" alt=""></div>
+  </div>
+</div>
+
+<!-- ═══ 9. SMART FEATURES — new slide ═══ -->
+<div class="slide" data-i="8">
+  <div class="split">
+    <div class="img-pano fi" onclick="zoom(this)"><img src="capsule-imgs/p3.jpg" alt="Interior"></div>
+    <div class="fi">
+      <div class="tag">ذكية &middot; مستدامة &middot; هادئة</div>
+      <h2><span class="accent">SMART.</span> SUSTAINABLE. SILENT.</h2>
+      <div class="g2" style="margin-top:14px">
+        <div>
+          <ul>
+            <li>نظام تحكم ذكي متكامل</li>
+            <li>طاقة شمسية اختيارية للاستقلال الكهربائي</li>
+            <li>عزل حراري وصوتي عالي الكثافة <span class="accent" style="font-weight:600">LYZAN</span></li>
+            <li>تكييف مركزي صامت 1.5 طن <span class="accent" style="font-weight:600">GREE</span></li>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li>نوافذ زجاج مزدوج <span class="accent" style="font-weight:600">Golden Glass</span></li>
+            <li>حمام فاخر <span class="accent" style="font-weight:600">ARTVIT</span></li>
+            <li>أنظمة تهوية وكهرباء متكاملة</li>
+            <li>إضاءة <span class="accent" style="font-weight:600">JEGR</span> متقدمة</li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top:18px;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:8px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:center">
+        <span style="font-family:Inter,sans-serif;font-size:.7rem;font-weight:700;color:var(--accent);letter-spacing:.08em">شركاؤنا:</span>
+        <span style="font-family:Inter,sans-serif;font-size:.78rem;font-weight:600;color:var(--cream)">LYZAN</span>
+        <span style="color:var(--gray-dim)">&middot;</span>
+        <span style="font-family:Inter,sans-serif;font-size:.78rem;font-weight:600;color:var(--cream)">Golden Glass</span>
+        <span style="color:var(--gray-dim)">&middot;</span>
+        <span style="font-family:Inter,sans-serif;font-size:.78rem;font-weight:600;color:var(--cream)">GREE</span>
+        <span style="color:var(--gray-dim)">&middot;</span>
+        <span style="font-family:Inter,sans-serif;font-size:.78rem;font-weight:600;color:var(--cream)">ARTVIT</span>
+        <span style="color:var(--gray-dim)">&middot;</span>
+        <span style="font-family:Inter,sans-serif;font-size:.78rem;font-weight:600;color:var(--cream)">SIMO</span>
+        <span style="color:var(--gray-dim)">&middot;</span>
+        <span style="font-family:Inter,sans-serif;font-size:.78rem;font-weight:600;color:var(--cream)">JEGR</span>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ═══ 9. HOW TO ORDER ═══ -->
-<div class="slide" data-i="8">
+<!-- ═══ 10. HOW TO ORDER ═══ -->
+<div class="slide" data-i="9">
   <div class="split">
-    <div style="position:relative;overflow:hidden">
-      <div class="img-bg kb" style="position:absolute;inset:0"><img src="capsule-imgs/p1.jpg" alt=""></div>
-    </div>
-    <div class="side">
-      <div class="tag fi">كيف تطلب</div>
-      <h2 class="fi">خطوات <span class="accent">الطلب</span></h2>
-      <div class="fi" style="margin-top:14px">
+    <div class="img-pano fi" onclick="zoom(this)"><img src="capsule-imgs/p1.jpg" alt="Exterior"></div>
+    <div class="fi">
+      <div class="tag">كيف تطلب</div>
+      <h2>خطوات <span class="accent">الطلب</span></h2>
+      <div style="margin-top:12px">
         <div class="srow"><div class="sn">١</div><div><strong>تواصل معنا</strong><span>اتصل أو واتساب لمناقشة احتياجاتك</span></div></div>
         <div class="srow"><div class="sn">٢</div><div><strong>حدد التخصيصات</strong><span>التشطيبات والألوان والتجهيزات</span></div></div>
         <div class="srow"><div class="sn">٣</div><div><strong>التصنيع</strong><span>في مصنعنا بكوردستان</span></div></div>
         <div class="srow"><div class="sn">٤</div><div><strong>التوصيل والتركيب</strong><span>نوصّل ونركّب بالكامل</span></div></div>
       </div>
-      <div class="hl fi"><p>نوفر خدمة التصميم حسب الطلب.</p></div>
+      <div class="hl" style="margin-top:14px"><p>نوفر خدمة التصميم حسب الطلب.</p></div>
     </div>
   </div>
 </div>
 
-<!-- ═══ 10. CONTACT — cinematic close ═══ -->
-<div class="slide tc" data-i="9">
+<!-- ═══ 11. CONTACT — cinematic close ═══ -->
+<div class="slide tc" data-i="10">
   <div class="img-bg kb"><img src="capsule-imgs/p11.jpg" alt=""></div>
   <div class="img-bg darken"></div>
   <div class="content" style="position:relative;z-index:1">
-    <div class="logo fi"><div class="logo-b">VC</div><div class="logo-t">VISION CAPSULE</div></div>
+    <div class="logo fi"><div class="logo-b">VC</div><div class="logo-t">VISION CAPSULE</div><div class="logo-sep"></div><div class="jegr"><div class="jegr-main">JEGR</div><div class="jegr-sub">For Lighting</div></div></div>
     <h2 class="fi" style="font-size:2.6rem">عيش المستقبل <span class="accent">اليوم.</span></h2>
     <div class="divider fi"></div>
     <p class="fi" style="font-size:.92rem;color:var(--gray);max-width:380px;margin:0 auto">تواصل معنا لطلب كبسولتك أو لمعرفة المزيد.</p>
@@ -329,7 +376,7 @@ ul li::before{content:'';position:absolute;right:0;top:10px;width:4px;height:4px
 </div>
 
 <div class="nav">
-  <span class="cnt" id="cnt">1 / 10</span>
+  <span class="cnt" id="cnt">1 / 11</span>
   <button id="pB" onclick="go(-1)" disabled>&#8594;</button>
   <button id="nB" onclick="go(1)">&#8592;</button>
 </div>
