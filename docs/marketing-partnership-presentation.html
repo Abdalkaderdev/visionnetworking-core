@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VisionNetworking — Marketing Partnership Proposal</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0F172A;
+    --bg-light: #1E293B;
+    --bg-card: #1a2744;
+    --accent: #0369A1;
+    --accent-light: #0EA5E9;
+    --accent-glow: rgba(3, 105, 161, 0.25);
+    --white: #F8FAFC;
+    --gray: #94A3B8;
+    --gray-light: #CBD5E1;
+    --success: #10B981;
+    --warning: #F59E0B;
+  }
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    color: var(--white);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Slide container */
+  .deck { position: relative; width: 100vw; height: 100vh; }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 100px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(40px);
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s 0.5s;
+    overflow-y: auto;
+  }
+
+  .slide.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s 0s;
+  }
+
+  .slide.exit-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    visibility: hidden;
+  }
+
+  /* Typography */
+  h1 { font-size: 3rem; font-weight: 700; line-height: 1.15; margin-bottom: 16px; }
+  h2 { font-size: 2.25rem; font-weight: 600; line-height: 1.2; margin-bottom: 12px; }
+  h3 { font-size: 1.35rem; font-weight: 600; margin-bottom: 8px; color: var(--accent-light); }
+  p, li { font-size: 1.05rem; line-height: 1.7; color: var(--gray-light); }
+  ul { list-style: none; padding: 0; }
+  ul li { padding-left: 24px; position: relative; margin-bottom: 10px; }
+  ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .accent { color: var(--accent-light); }
+  .section-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    padding: 4px 14px;
+    margin-bottom: 20px;
+  }
+
+  /* Logo block */
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .logo-icon {
+    width: 64px;
+    height: 64px;
+    background: var(--accent);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 1px;
+  }
+  .logo-text {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  /* Stat blocks */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px;
+    margin-top: 30px;
+  }
+  .stat {
+    background: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 28px 24px;
+    text-align: center;
+  }
+  .stat .number {
+    font-size: 2.6rem;
+    font-weight: 800;
+    color: var(--accent-light);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat .label {
+    font-size: 0.85rem;
+    color: var(--gray);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* Flow steps */
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-top: 36px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .flow-step {
+    background: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 30px 28px;
+    text-align: center;
+    flex: 1;
+    min-width: 180px;
+    max-width: 240px;
+  }
+  .flow-step .step-num {
+    width: 42px;
+    height: 42px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin: 0 auto 14px;
+  }
+  .flow-step .step-title { font-weight: 600; font-size: 1rem; margin-bottom: 6px; color: var(--white); }
+  .flow-step .step-desc { font-size: 0.8rem; color: var(--gray); }
+  .flow-arrow {
+    font-size: 1.5rem;
+    color: var(--accent);
+    padding: 0 8px;
+    flex-shrink: 0;
+  }
+
+  /* Two-column layout */
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 24px; }
+  .cols.three { grid-template-columns: 1fr 1fr 1fr; }
+
+  /* Card */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 28px;
+  }
+  .card h3 { margin-bottom: 14px; }
+
+  /* Table */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 0.95rem;
+  }
+  .data-table th {
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 2px solid var(--accent);
+    font-weight: 600;
+    color: var(--accent-light);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .data-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    color: var(--gray-light);
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+
+  /* Timeline */
+  .timeline { margin-top: 28px; display: flex; gap: 28px; }
+  .timeline-phase {
+    flex: 1;
+    background: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 28px;
+    position: relative;
+    border-top: 3px solid var(--accent);
+  }
+  .timeline-phase .phase-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    margin-bottom: 6px;
+  }
+  .timeline-phase h3 { color: var(--white); }
+  .timeline-phase ul li { font-size: 0.9rem; margin-bottom: 6px; }
+
+  /* KPI grid */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 24px;
+  }
+  .kpi {
+    background: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 24px;
+    border-left: 4px solid var(--accent);
+  }
+  .kpi .kpi-name { font-weight: 600; color: var(--white); margin-bottom: 4px; }
+  .kpi .kpi-target { font-size: 0.85rem; color: var(--gray); }
+
+  /* Steps list */
+  .steps-list { counter-reset: step; margin-top: 24px; }
+  .steps-list li {
+    counter-increment: step;
+    padding-left: 60px;
+    position: relative;
+    margin-bottom: 24px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .steps-list li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #fff;
+  }
+
+  /* Reasons grid */
+  .reasons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 24px;
+  }
+  .reason {
+    background: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .reason-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+  }
+  .reason h4 { font-weight: 600; font-size: 1rem; margin-bottom: 4px; }
+  .reason p { font-size: 0.85rem; color: var(--gray); margin: 0; }
+
+  /* Contact */
+  .contact-block {
+    text-align: center;
+    margin-top: 30px;
+  }
+  .contact-block .contact-items {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+  }
+  .contact-item { text-align: center; }
+  .contact-item .ci-label { font-size: 0.75rem; color: var(--gray); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px; }
+  .contact-item .ci-value { font-size: 1.05rem; color: var(--white); font-weight: 500; }
+
+  /* Navigation */
+  .nav {
+    position: fixed;
+    bottom: 28px;
+    right: 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    z-index: 100;
+  }
+  .nav .counter {
+    font-size: 0.8rem;
+    color: var(--gray);
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+  .nav button {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: var(--bg-light);
+    color: var(--white);
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .nav button:hover { background: var(--accent); border-color: var(--accent); }
+  .nav button:disabled { opacity: 0.3; cursor: default; }
+  .nav button:disabled:hover { background: var(--bg-light); border-color: rgba(255,255,255,0.12); }
+
+  /* Progress bar */
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--accent);
+    transition: width 0.4s ease;
+    z-index: 100;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .slide { padding: 40px 48px; }
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.7rem; }
+    .cols { grid-template-columns: 1fr; gap: 24px; }
+    .cols.three { grid-template-columns: 1fr; }
+    .flow { flex-direction: column; gap: 12px; }
+    .flow-arrow { transform: rotate(90deg); }
+    .timeline { flex-direction: column; gap: 16px; }
+    .reasons { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 640px) {
+    .slide { padding: 32px 24px; }
+    h1 { font-size: 1.8rem; }
+    .stats { grid-template-columns: 1fr; }
+  }
+
+  /* Print */
+  @media print {
+    html, body { overflow: visible; height: auto; }
+    .slide {
+      position: relative;
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: none !important;
+      page-break-after: always;
+      page-break-inside: avoid;
+      min-height: 100vh;
+      padding: 40px 60px;
+    }
+    .nav, .progress-bar { display: none; }
+    .slide.exit-left { opacity: 1 !important; transform: none !important; visibility: visible !important; }
+  }
+
+  /* Tech card icons (CSS shapes) */
+  .tech-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+  }
+  .tech-icon.ai { background: linear-gradient(135deg, #0369A1, #0EA5E9); }
+  .tech-icon.cv { background: linear-gradient(135deg, #7C3AED, #A78BFA); }
+  .tech-icon.sm { background: linear-gradient(135deg, #059669, #34D399); }
+
+  /* Title slide centering */
+  .title-centered {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .title-centered .logo { margin-bottom: 40px; }
+  .title-centered h1 { font-size: 3.2rem; margin-bottom: 12px; }
+  .title-centered .subtitle { font-size: 1.3rem; color: var(--gray-light); font-weight: 400; margin-bottom: 8px; }
+  .title-centered .date { font-size: 0.95rem; color: var(--gray); margin-top: 8px; }
+
+  /* Divider line */
+  .divider {
+    width: 60px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+    margin: 16px 0;
+  }
+
+  /* Highlight box */
+  .highlight-box {
+    background: var(--accent-glow);
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    padding: 20px 28px;
+    margin-top: 20px;
+  }
+  .highlight-box p { color: var(--white); font-weight: 500; }
+
+  /* Gap statement */
+  .gap-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    margin: 36px 0;
+  }
+  .gap-side {
+    background: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 28px 36px;
+    text-align: center;
+    min-width: 220px;
+  }
+  .gap-side h3 { color: var(--gray); font-size: 1rem; }
+  .gap-side .value { font-size: 1.6rem; font-weight: 700; color: var(--white); margin-top: 8px; }
+  .gap-bridge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .gap-bridge .arrow-line {
+    width: 80px;
+    height: 3px;
+    background: var(--accent);
+    position: relative;
+  }
+  .gap-bridge .bridge-label {
+    font-size: 0.75rem;
+    color: var(--accent-light);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  /* Channel tags */
+  .channel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .channel {
+    background: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .channel .ch-name { font-weight: 600; color: var(--white); margin-bottom: 4px; }
+  .channel .ch-stat { font-size: 0.85rem; color: var(--accent-light); margin-bottom: 6px; font-weight: 500; }
+  .channel .ch-note { font-size: 0.8rem; color: var(--gray); }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="deck" id="deck">
+
+  <!-- SLIDE 1: Title -->
+  <div class="slide title-centered active" data-index="0">
+    <div class="logo">
+      <div class="logo-icon">VN</div>
+      <div class="logo-text">VisionNetworking</div>
+    </div>
+    <h1>Marketing Partnership<br>Proposal</h1>
+    <p class="subtitle">Building Iraq's First AI-Powered Procurement Platform</p>
+    <div class="divider" style="margin: 16px auto;"></div>
+    <p class="date">April 2026 &middot; Confidential</p>
+  </div>
+
+  <!-- SLIDE 2: The Problem -->
+  <div class="slide" data-index="1">
+    <span class="section-tag">Who We Are</span>
+    <h2>The Problem</h2>
+    <p style="margin-bottom: 20px;">How procurement works in Iraq today:</p>
+    <div class="cols">
+      <div>
+        <ul>
+          <li>Everything is <strong class="accent">manual</strong> &mdash; phone calls, spreadsheets, paper</li>
+          <li>Contractors call <strong class="accent">20+ suppliers</strong> for a single quote</li>
+          <li>Price comparison takes <strong class="accent">days, not minutes</strong></li>
+          <li>No centralized supplier directory</li>
+        </ul>
+      </div>
+      <div>
+        <ul>
+          <li>Negotiations happen on <strong class="accent">WhatsApp</strong> with no record</li>
+          <li>Zero price transparency across the market</li>
+          <li>Repeated trips to showrooms across the city</li>
+          <li>Massive time &amp; cost waste on every project</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-box">
+      <p>A single procurement cycle can take 5&ndash;10 days of back-and-forth. We reduce that to under 24 hours.</p>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: Our Solution -->
+  <div class="slide" data-index="2">
+    <span class="section-tag">Who We Are</span>
+    <h2>Our Solution</h2>
+    <p style="margin-bottom: 24px;"><strong class="accent">VisionNetworking</strong> &mdash; Iraq's first AI-powered BOQ-to-Quotation platform</p>
+    <div class="stats">
+      <div class="stat">
+        <div class="number">1</div>
+        <div class="label">Platform</div>
+      </div>
+      <div class="stat">
+        <div class="number">38</div>
+        <div class="label">Buildings</div>
+      </div>
+      <div class="stat">
+        <div class="number">100+</div>
+        <div class="label">Brands</div>
+      </div>
+      <div class="stat">
+        <div class="number">&lt;24h</div>
+        <div class="label">Turnaround</div>
+      </div>
+    </div>
+    <div class="highlight-box" style="margin-top: 28px;">
+      <p>Submit a BOQ. Get a competitive, multi-brand quotation &mdash; automatically.</p>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: How It Works -->
+  <div class="slide" data-index="3">
+    <span class="section-tag">Who We Are</span>
+    <h2>How It Works</h2>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="step-num">1</div>
+        <div class="step-title">Submit BOQ</div>
+        <div class="step-desc">Upload your Bill of Quantities in any format</div>
+      </div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-step">
+        <div class="step-num">2</div>
+        <div class="step-title">AI Processing</div>
+        <div class="step-desc">Smart parsing, matching &amp; pricing engine</div>
+      </div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-step">
+        <div class="step-num">3</div>
+        <div class="step-title">Get Quotation</div>
+        <div class="step-desc">Receive competitive multi-brand quotes</div>
+      </div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-step">
+        <div class="step-num">4</div>
+        <div class="step-title">Connect</div>
+        <div class="step-desc">Connect directly with matched suppliers</div>
+      </div>
+    </div>
+    <p style="text-align: center; margin-top: 32px; color: var(--gray); font-size: 0.95rem;">From document upload to supplier connection &mdash; fully automated, AI-driven</p>
+  </div>
+
+  <!-- SLIDE 5: Our Network -->
+  <div class="slide" data-index="4">
+    <span class="section-tag">Who We Are</span>
+    <h2>Our Network</h2>
+    <p style="margin-bottom: 8px;">A curated, verified supplier ecosystem spanning Iraq</p>
+    <div class="stats">
+      <div class="stat">
+        <div class="number">38</div>
+        <div class="label">Buildings</div>
+      </div>
+      <div class="stat">
+        <div class="number">100+</div>
+        <div class="label">Brands</div>
+      </div>
+      <div class="stat">
+        <div class="number">18</div>
+        <div class="label">Governorates</div>
+      </div>
+      <div class="stat">
+        <div class="number">12</div>
+        <div class="label">Industries</div>
+      </div>
+    </div>
+    <div class="highlight-box" style="margin-top: 28px;">
+      <p>Every supplier is physically verified. Every product is cataloged with real pricing data.</p>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: Technology -->
+  <div class="slide" data-index="5">
+    <span class="section-tag">Who We Are</span>
+    <h2>Technology</h2>
+    <p style="margin-bottom: 16px;">Proprietary AI stack built specifically for Iraqi procurement</p>
+    <div class="cols three">
+      <div class="card">
+        <div class="tech-icon ai">AI</div>
+        <h3 style="color: var(--white);">Document Parsing</h3>
+        <p style="font-size: 0.9rem;">Reads BOQs in any format &mdash; PDF, Excel, scanned images. Extracts line items, quantities, and specifications automatically.</p>
+      </div>
+      <div class="card">
+        <div class="tech-icon cv">CV</div>
+        <h3 style="color: var(--white);">Computer Vision</h3>
+        <p style="font-size: 0.9rem;">Product recognition from images. Identify brands, models, and specifications from photos of products in showrooms.</p>
+      </div>
+      <div class="card">
+        <div class="tech-icon sm">SM</div>
+        <h3 style="color: var(--white);">Smart Matching</h3>
+        <p style="font-size: 0.9rem;">Intelligent supplier matching based on location, price, availability, and quality score. Best fit, every time.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: Market Size -->
+  <div class="slide" data-index="6">
+    <span class="section-tag">The Opportunity</span>
+    <h2>Market Size</h2>
+    <div class="stats" style="margin-top: 16px;">
+      <div class="stat">
+        <div class="number">$25&ndash;35B</div>
+        <div class="label">Iraq Construction Market</div>
+      </div>
+      <div class="stat">
+        <div class="number">8%+</div>
+        <div class="label">Annual Growth</div>
+      </div>
+      <div class="stat">
+        <div class="number">0</div>
+        <div class="label">Direct Digital Competitors</div>
+      </div>
+    </div>
+    <div class="cols" style="margin-top: 28px;">
+      <div>
+        <h3>Growth Drivers</h3>
+        <ul>
+          <li>Post-conflict reconstruction &amp; infrastructure investment</li>
+          <li>Government housing &amp; development mega-projects</li>
+          <li>Private sector real estate boom</li>
+          <li>Foreign direct investment increasing</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Why Now</h3>
+        <ul>
+          <li>Mobile internet penetration at all-time high</li>
+          <li>Young, tech-adopting population</li>
+          <li>No incumbent digital platform to compete with</li>
+          <li>Market ready for digital transformation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: The Gap -->
+  <div class="slide" data-index="7">
+    <span class="section-tag">The Opportunity</span>
+    <h2>The Gap</h2>
+    <p style="text-align: center; margin-bottom: 12px;">No digital B2B procurement platform exists in Iraq</p>
+    <div class="gap-visual">
+      <div class="gap-side">
+        <h3>Today</h3>
+        <div class="value">Manual</div>
+        <p style="font-size: 0.85rem; color: var(--gray); margin-top: 8px;">Phone calls, WhatsApp, in-person visits</p>
+      </div>
+      <div class="gap-bridge">
+        <div class="bridge-label">VisionNetworking</div>
+        <div class="arrow-line"></div>
+      </div>
+      <div class="gap-side" style="border-color: var(--accent);">
+        <h3 style="color: var(--accent-light);">Tomorrow</h3>
+        <div class="value" style="color: var(--accent-light);">Digital</div>
+        <p style="font-size: 0.85rem; color: var(--gray); margin-top: 8px;">AI-powered, instant, transparent</p>
+      </div>
+    </div>
+    <div class="highlight-box">
+      <p>VisionNetworking is the first &mdash; and currently only &mdash; platform addressing this gap. The opportunity window is now.</p>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: Target Audience -->
+  <div class="slide" data-index="8">
+    <span class="section-tag">The Opportunity</span>
+    <h2>Target Audience</h2>
+    <div class="cols" style="margin-top: 16px;">
+      <div>
+        <h3>Primary Users</h3>
+        <ul>
+          <li><strong>Contractors</strong> &mdash; general &amp; specialized construction firms</li>
+          <li><strong>Project Managers</strong> &mdash; overseeing large-scale builds</li>
+          <li><strong>Procurement Officers</strong> &mdash; sourcing materials daily</li>
+          <li><strong>Business Owners</strong> &mdash; renovating or building commercial spaces</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Market Potential</h3>
+        <div class="stats" style="margin-top: 12px;">
+          <div class="stat">
+            <div class="number" style="font-size: 1.8rem;">50K+</div>
+            <div class="label">Estimated Contractors</div>
+          </div>
+          <div class="stat">
+            <div class="number" style="font-size: 1.8rem;">10K+</div>
+            <div class="label">Active Suppliers</div>
+          </div>
+        </div>
+        <p style="margin-top: 16px; font-size: 0.9rem;">Every construction project in Iraq requires procurement. Our total addressable market spans the entire industry.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 10: Digital Landscape -->
+  <div class="slide" data-index="9">
+    <span class="section-tag">The Opportunity</span>
+    <h2>Digital Landscape in Iraq</h2>
+    <p style="margin-bottom: 16px;">Understanding where our audience lives online</p>
+    <div class="channel-grid">
+      <div class="channel">
+        <div class="ch-name">Facebook</div>
+        <div class="ch-stat">#1 Social Platform</div>
+        <div class="ch-note">Primary discovery &amp; engagement channel. Groups are massive for B2B.</div>
+      </div>
+      <div class="channel">
+        <div class="ch-name">WhatsApp</div>
+        <div class="ch-stat">Critical for Business</div>
+        <div class="ch-note">All business conversations happen here. Must integrate into workflow.</div>
+      </div>
+      <div class="channel">
+        <div class="ch-name">Mobile-First</div>
+        <div class="ch-stat">93% Mobile Users</div>
+        <div class="ch-note">Everything must be designed mobile-first. Desktop is secondary.</div>
+      </div>
+      <div class="channel">
+        <div class="ch-name">Arabic-First</div>
+        <div class="ch-stat">Primary Language</div>
+        <div class="ch-note">All content, ads, and UX must lead with Arabic. English secondary.</div>
+      </div>
+      <div class="channel">
+        <div class="ch-name">YouTube</div>
+        <div class="ch-stat">High Engagement</div>
+        <div class="ch-note">Video content performs well. Tutorials, product demos, testimonials.</div>
+      </div>
+      <div class="channel">
+        <div class="ch-name">Instagram</div>
+        <div class="ch-stat">Growing Fast</div>
+        <div class="ch-note">Visual platform ideal for product showcases and brand building.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 11: What We Bring -->
+  <div class="slide" data-index="10">
+    <span class="section-tag">The Partnership</span>
+    <h2>What We Bring</h2>
+    <div class="cols" style="margin-top: 16px;">
+      <div class="card">
+        <h3>Platform &amp; Technology</h3>
+        <ul>
+          <li>Fully built AI-powered procurement platform</li>
+          <li>Mobile-optimized web application</li>
+          <li>Admin dashboard &amp; analytics</li>
+          <li>WhatsApp Business API integration</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Network &amp; Expertise</h3>
+        <ul>
+          <li>38 verified supplier buildings</li>
+          <li>100+ active brand partnerships</li>
+          <li>Deep domain knowledge in Iraqi procurement</li>
+          <li>Real pricing data &amp; product catalog</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card" style="margin-top: 20px;">
+      <h3>Data &amp; Insights</h3>
+      <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px;">
+        <li>Product pricing trends across governorates</li>
+        <li>Supplier performance metrics</li>
+        <li>Market demand signals by category</li>
+        <li>User behavior &amp; engagement analytics</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SLIDE 12: What We Need -->
+  <div class="slide" data-index="11">
+    <span class="section-tag">The Partnership</span>
+    <h2>What We Need</h2>
+    <p style="margin-bottom: 16px;">A strategic marketing partner to accelerate growth</p>
+    <div class="cols" style="margin-top: 8px;">
+      <div>
+        <h3>Brand &amp; Creative</h3>
+        <ul>
+          <li>Brand identity &amp; visual language</li>
+          <li>Content strategy &amp; production</li>
+          <li>Social media management</li>
+          <li>Video production &amp; photography</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Growth &amp; Performance</h3>
+        <ul>
+          <li>Paid advertising (Facebook, Google, YouTube)</li>
+          <li>SEO &amp; organic traffic strategy</li>
+          <li>Lead generation campaigns</li>
+          <li>WhatsApp marketing automation</li>
+        </ul>
+      </div>
+    </div>
+    <div class="cols" style="margin-top: 20px;">
+      <div>
+        <h3>Offline &amp; PR</h3>
+        <ul>
+          <li>Industry events &amp; trade shows</li>
+          <li>Press releases &amp; media outreach</li>
+          <li>Partnership co-marketing</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Analytics &amp; Reporting</h3>
+        <ul>
+          <li>Campaign performance tracking</li>
+          <li>Monthly reporting &amp; insights</li>
+          <li>A/B testing &amp; optimization</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 13: Deliverables -->
+  <div class="slide" data-index="12">
+    <span class="section-tag">The Partnership</span>
+    <h2>Key Deliverables</h2>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Deliverable</th>
+          <th>Frequency</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color: var(--white); font-weight: 500;">Blog Articles</td>
+          <td>4 / month</td>
+          <td>SEO-optimized, Arabic &amp; English, industry topics</td>
+        </tr>
+        <tr>
+          <td style="color: var(--white); font-weight: 500;">Video Content</td>
+          <td>2 / month</td>
+          <td>Product demos, testimonials, tutorials</td>
+        </tr>
+        <tr>
+          <td style="color: var(--white); font-weight: 500;">Social Media Posts</td>
+          <td>Daily</td>
+          <td>Facebook, Instagram, LinkedIn &mdash; Arabic-first</td>
+        </tr>
+        <tr>
+          <td style="color: var(--white); font-weight: 500;">Paid Campaigns</td>
+          <td>Ongoing</td>
+          <td>Facebook Ads, Google Ads, YouTube pre-roll</td>
+        </tr>
+        <tr>
+          <td style="color: var(--white); font-weight: 500;">WhatsApp Campaigns</td>
+          <td>2 / month</td>
+          <td>Broadcast lists, automated sequences</td>
+        </tr>
+        <tr>
+          <td style="color: var(--white); font-weight: 500;">Performance Report</td>
+          <td>Monthly</td>
+          <td>KPIs, insights, recommendations, next month plan</td>
+        </tr>
+        <tr>
+          <td style="color: var(--white); font-weight: 500;">SEO Audit &amp; Updates</td>
+          <td>Monthly</td>
+          <td>Technical SEO, keyword tracking, content optimization</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SLIDE 14: Timeline -->
+  <div class="slide" data-index="13">
+    <span class="section-tag">The Partnership</span>
+    <h2>Timeline</h2>
+    <div class="timeline">
+      <div class="timeline-phase">
+        <div class="phase-label">Phase 1</div>
+        <h3 style="color: var(--white);">Foundation</h3>
+        <p style="font-size: 0.85rem; color: var(--accent-light); margin-bottom: 12px;">Months 1&ndash;3</p>
+        <ul>
+          <li>Brand identity finalization</li>
+          <li>Content calendar &amp; strategy</li>
+          <li>Social media setup &amp; launch</li>
+          <li>Website SEO baseline</li>
+          <li>First paid ad campaigns</li>
+        </ul>
+      </div>
+      <div class="timeline-phase">
+        <div class="phase-label">Phase 2</div>
+        <h3 style="color: var(--white);">Growth</h3>
+        <p style="font-size: 0.85rem; color: var(--accent-light); margin-bottom: 12px;">Months 4&ndash;6</p>
+        <ul>
+          <li>Scale paid campaigns</li>
+          <li>Influencer partnerships</li>
+          <li>Industry event presence</li>
+          <li>WhatsApp automation</li>
+          <li>Video content series</li>
+        </ul>
+      </div>
+      <div class="timeline-phase">
+        <div class="phase-label">Phase 3</div>
+        <h3 style="color: var(--white);">Scale</h3>
+        <p style="font-size: 0.85rem; color: var(--accent-light); margin-bottom: 12px;">Months 7&ndash;12</p>
+        <ul>
+          <li>Full-funnel optimization</li>
+          <li>Expansion to new governorates</li>
+          <li>PR &amp; media campaign</li>
+          <li>Community building</li>
+          <li>Performance-based scaling</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 15: KPIs -->
+  <div class="slide" data-index="14">
+    <span class="section-tag">The Partnership</span>
+    <h2>How We Measure Success</h2>
+    <p style="margin-bottom: 8px;">Clear, measurable KPIs aligned to business growth</p>
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="kpi-name">Qualified Leads</div>
+        <div class="kpi-target">Target: 200+ / month by M6</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-name">Cost Per Lead (CPL)</div>
+        <div class="kpi-target">Target: Decrease 30% quarter-over-quarter</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-name">ROAS</div>
+        <div class="kpi-target">Target: 4x return on ad spend</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-name">Website Traffic</div>
+        <div class="kpi-target">Target: 10K monthly visitors by M6</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-name">Social Engagement</div>
+        <div class="kpi-target">Target: 5% avg. engagement rate</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-name">Conversion Rate</div>
+        <div class="kpi-target">Target: 8% visitor-to-lead</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-name">Brand Awareness</div>
+        <div class="kpi-target">Target: 50K reach / month by M6</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-name">Supplier Onboarding</div>
+        <div class="kpi-target">Target: 20 new suppliers / month</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 16: Why Partner With Us -->
+  <div class="slide" data-index="15">
+    <span class="section-tag">Next Steps</span>
+    <h2>Why Partner With Us</h2>
+    <div class="reasons">
+      <div class="reason">
+        <div class="reason-icon">1</div>
+        <div>
+          <h4>First Mover Advantage</h4>
+          <p>No digital procurement platform exists in Iraq. We are building the category.</p>
+        </div>
+      </div>
+      <div class="reason">
+        <div class="reason-icon">2</div>
+        <div>
+          <h4>Zero Competition</h4>
+          <p>No direct competitor in the Iraqi market. Clear runway for growth.</p>
+        </div>
+      </div>
+      <div class="reason">
+        <div class="reason-icon">3</div>
+        <div>
+          <h4>Massive Market</h4>
+          <p>$25-35B construction market with 8%+ annual growth and rising digital adoption.</p>
+        </div>
+      </div>
+      <div class="reason">
+        <div class="reason-icon">4</div>
+        <div>
+          <h4>AI-Powered Platform</h4>
+          <p>Cutting-edge technology that delivers real value: speed, accuracy, cost savings.</p>
+        </div>
+      </div>
+      <div class="reason">
+        <div class="reason-icon">5</div>
+        <div>
+          <h4>Proven Network</h4>
+          <p>38 buildings, 100+ brands already on board. Real traction, not just an idea.</p>
+        </div>
+      </div>
+      <div class="reason">
+        <div class="reason-icon">6</div>
+        <div>
+          <h4>Growth Trajectory</h4>
+          <p>Expanding fast across governorates. Your work will have immediate, visible impact.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 17: Next Steps -->
+  <div class="slide" data-index="16">
+    <span class="section-tag">Next Steps</span>
+    <h2>Next Steps</h2>
+    <p style="margin-bottom: 8px;">Let's move forward together</p>
+    <ul class="steps-list">
+      <li><div><strong style="color: var(--white); font-size: 1.1rem;">Review Statement of Work</strong><br><span style="color: var(--gray); font-size: 0.9rem;">We've prepared a detailed SOW with scope, deliverables, and expectations</span></div></li>
+      <li><div><strong style="color: var(--white); font-size: 1.1rem;">Discuss Budget &amp; Pricing</strong><br><span style="color: var(--gray); font-size: 0.9rem;">Align on investment, payment terms, and performance incentives</span></div></li>
+      <li><div><strong style="color: var(--white); font-size: 1.1rem;">Kickoff Meeting</strong><br><span style="color: var(--gray); font-size: 0.9rem;">Deep dive into brand, audience, channels, and first-month plan</span></div></li>
+      <li><div><strong style="color: var(--white); font-size: 1.1rem;">Launch Phase 1</strong><br><span style="color: var(--gray); font-size: 0.9rem;">Brand, content, social, and first campaigns go live</span></div></li>
+    </ul>
+    <div class="highlight-box" style="margin-top: 28px;">
+      <p>We're looking for a partner, not a vendor. Someone who believes in the vision and wants to build something historic in the Iraqi market.</p>
+    </div>
+  </div>
+
+  <!-- SLIDE 18: Contact -->
+  <div class="slide title-centered" data-index="17">
+    <div class="logo" style="margin-bottom: 30px;">
+      <div class="logo-icon">VN</div>
+      <div class="logo-text">VisionNetworking</div>
+    </div>
+    <h2>Let's Build the Future<br>of Iraqi Procurement</h2>
+    <div class="divider" style="margin: 20px auto;"></div>
+    <div class="contact-block">
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="ci-label">Location</div>
+          <div class="ci-value">Baghdad, Iraq</div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-label">Email</div>
+          <div class="ci-value">info@visionnetworking.iq</div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-label">Phone</div>
+          <div class="ci-value">+964 XXX XXX XXXX</div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-label">Web</div>
+          <div class="ci-value">visionnetworking.iq</div>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top: 48px; font-size: 0.8rem; color: var(--gray);">Confidential &middot; April 2026 &middot; VisionNetworking</p>
+  </div>
+
+</div>
+
+<!-- Navigation -->
+<div class="nav">
+  <span class="counter" id="counter">1 / 18</span>
+  <button id="prevBtn" onclick="navigate(-1)" disabled>&#8592;</button>
+  <button id="nextBtn" onclick="navigate(1)">&#8594;</button>
+</div>
+
+<script>
+(function() {
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+
+  const counter = document.getElementById('counter');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const progressBar = document.getElementById('progressBar');
+
+  function update() {
+    slides.forEach((s, i) => {
+      s.classList.remove('active', 'exit-left');
+      if (i === current) {
+        s.classList.add('active');
+      } else if (i < current) {
+        s.classList.add('exit-left');
+      }
+    });
+    counter.textContent = (current + 1) + ' / ' + total;
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === total - 1;
+    progressBar.style.width = ((current + 1) / total * 100) + '%';
+  }
+
+  window.navigate = function(dir) {
+    const next = current + dir;
+    if (next >= 0 && next < total) {
+      current = next;
+      update();
+    }
+  };
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+      e.preventDefault();
+      navigate(1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      navigate(-1);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      current = 0;
+      update();
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      current = total - 1;
+      update();
+    }
+  });
+
+  // Touch support
+  let touchStartX = 0;
+  document.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+  document.addEventListener('touchend', function(e) {
+    const diff = touchStartX - e.changedTouches[0].screenX;
+    if (Math.abs(diff) > 50) {
+      navigate(diff > 0 ? 1 : -1);
+    }
+  });
+
+  update();
+})();
+</script>
+
+</body>
+</html>
