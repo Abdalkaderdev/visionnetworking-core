@@ -1,7 +1,12 @@
-from sqlalchemy import Column, Integer, String, Text, ForeignKey
+from sqlalchemy import Column, Integer, String, Text, ForeignKey, LargeBinary
 from sqlalchemy.orm import relationship
-from pgvector.sqlalchemy import Vector
 from app.database import Base
+
+try:
+    from pgvector.sqlalchemy import Vector
+    EmbeddingType = Vector(1536)
+except Exception:
+    EmbeddingType = LargeBinary
 
 
 class Item(Base):
@@ -12,6 +17,6 @@ class Item(Base):
     sku = Column(String, default="")
     unit = Column(String, default="")
     description = Column(Text, default="")
-    embedding = Column(Vector(1536), nullable=True)
+    embedding = Column(EmbeddingType, nullable=True)
     brand = relationship("Brand", back_populates="items")
     prices = relationship("Price", back_populates="item", cascade="all, delete-orphan")
